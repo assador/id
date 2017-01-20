@@ -1,4 +1,5 @@
 <?php
+
 class UserSession {
 
   const SYS_ADMIN='sys';

@@ -1,4 +1,5 @@
 <?php
+
 class AppData {
   private static $data=array();
   private static $output=array();
