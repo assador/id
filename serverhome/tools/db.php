@@ -1,4 +1,5 @@
 <?php
+
 function dbConnect($dbserver,$dbuser,$dbpassword,$dbname,$codepage){
   $db = new mysqli($dbserver, $dbuser, $dbpassword, $dbname);
   if ($db->connect_error) {

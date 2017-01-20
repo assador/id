@@ -1,4 +1,5 @@
 <?php
+
 try {
   require 'defs.php';
   require HOME.'/tools/log.php';

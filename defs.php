@@ -1,10 +1,10 @@
 <?php
 define('DBSERVER','localhost');
-define('DBUSER','root');
+define('DBUSER','dbu_ewaiter');
 define('DBPASSWORD','1');
 define('DBNAME','ewaiter');
 
-define('HOME','servercode');
+define('HOME','serverhome');
 define('CACHE','cache');
 define('IMG','img');
 
