@@ -1,76 +1,39 @@
+import Header from "./service/header.jsx";
+import TestSwitcher from "./modules/switcher.jsx";
+import TestModule1 from "./modules/test.jsx";
+import TestModule2 from "./modules/test2.jsx";
+
 class App extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = {
 			destURL: "/agate.php",
 			session: "",
-			module: this.props.moduleInitial,
+			module: this.props.initialModule,
+			moduleProp: this.props.initialModuleProp ? this.props.initialModuleProp : {},
 		};
 	}
-// Пока просто играюсь
-	setModule(m) {
-		this.setState({module: m});
+	setAppModule(m, p) {
+		this.setState({module: m, moduleProp: p});
 	}
 	render() {
-		let currentModule = null;
-		switch(this.state.module) {
-			case 1 :
-				currentModule = React.createElement(
-					TestModule1, {text: "App.state.module = 1"}
-				);
-				break;
-			case 2 :
-				currentModule = React.createElement(
-					TestModule2, {text: "App.state.module = 2"}
-				);
-				break;
-			default :
-				currentModule = React.createElement(
-					TestModule3, {text: "App.state.module = 3"}
-				);
-		}
-		return (
-			React.createElement("div", {},
-				currentModule,
-				React.createElement(TestSwitcher, {setModule: this.setModule.bind(this)})
-			)
-		);
-	}
-}
-class TestSwitcher extends React.Component {
-	render() {
+		let Module = this.state.module;
 		return (
 			<div>
-				<button onClick={()=>this.props.setModule(1)}>TestModule1</button>
-				<button onClick={()=>this.props.setModule(2)}>TestModule2</button>
-				<button onClick={()=>this.props.setModule(3)}>TestModule3</button>
+				<Header module={this.state.module} />
+				<Module {...this.state.moduleProp} />
+				<TestSwitcher setAppModule={this.setAppModule.bind(this)} />
 			</div>
 		);
 	}
 }
-class TestModule1 extends React.Component {
-	render() {
-		return (
-			<h1>TestModule1, {this.props.text}</h1>
-		);
-	}
-}
-class TestModule2 extends React.Component {
-	render() {
-		return (
-			<h1>TestModule2, {this.props.text}</h1>
-		);
-	}
-}
-class TestModule3 extends React.Component {
-	render() {
-		return (
-			<h1>TestModule3, {this.props.text}</h1>
-		);
-	}
-}
+
 ReactDOM.render(React.createElement(
 	App, {
-		moduleInitial: 2,
+		initialModule: TestModule1,
+		initialModuleProp: {
+			prop1: "Какое-то свойство",
+			prop2: "Ещё какое-то свойство",
+		},
 	}
 ), document.getElementById("ewaiter-app"));
