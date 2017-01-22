@@ -1,76 +1,53 @@
+import Header from "./service/header.jsx";
+import TestSwitcher from "./modules/switcher.jsx";
+import TestModule1 from "./modules/test.jsx";
+import TestModule2 from "./modules/test2.jsx";
+
 class App extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = {
 			destURL: "/agate.php",
 			session: "",
-			module: this.props.moduleInitial,
+			modules: {},
+			moduleActiveId: "",
 		};
 	}
-// Пока просто играюсь
-	setModule(m) {
-		this.setState({module: m});
+	componentWillMount() {
+		this.setAppModule({
+			id: "TestModule1_0",
+			type: TestModule1,
+			props: {
+				prop1: "Какое-то свойство",
+				prop2: "Ещё какое-то свойство",
+			}
+		});
 	}
-	render() {
-		let currentModule = null;
-		switch(this.state.module) {
-			case 1 :
-				currentModule = React.createElement(
-					TestModule1, {text: "App.state.module = 1"}
-				);
-				break;
-			case 2 :
-				currentModule = React.createElement(
-					TestModule2, {text: "App.state.module = 2"}
-				);
-				break;
-			default :
-				currentModule = React.createElement(
-					TestModule3, {text: "App.state.module = 3"}
-				);
+	/**
+	 * Создаёт или, если уже создан, выбирает экземпляр модуля в хэше this.state.modules
+	 * В другом модуле (предварительно прокинув функцию в его props) вызывается так:
+	 * this.props.setAppModule({id: "<ID>", type: <CLASS>, props: {<PROPS>}, evt: <EVT>})
+	 */
+	setAppModule(p) {
+		let modules = this.state.modules;
+		if(!this.state.modules[p.id]) {
+			modules[p.id] = React.createElement(p.type, p.props);
 		}
-		return (
-			React.createElement("div", {},
-				currentModule,
-				React.createElement(TestSwitcher, {setModule: this.setModule.bind(this)})
-			)
-		);
+		this.setState({
+			modules: modules,
+			moduleActiveId: p.id,
+		});
 	}
-}
-class TestSwitcher extends React.Component {
 	render() {
+		let activeModule = this.state.modules[this.state.moduleActiveId];
 		return (
 			<div>
-				<button onClick={()=>this.props.setModule(1)}>TestModule1</button>
-				<button onClick={()=>this.props.setModule(2)}>TestModule2</button>
-				<button onClick={()=>this.props.setModule(3)}>TestModule3</button>
+				<Header module={activeModule} moduleId={this.state.moduleActiveId} />
+				{activeModule}
+				<TestSwitcher setAppModule={this.setAppModule.bind(this)} />
 			</div>
 		);
 	}
 }
-class TestModule1 extends React.Component {
-	render() {
-		return (
-			<h1>TestModule1, {this.props.text}</h1>
-		);
-	}
-}
-class TestModule2 extends React.Component {
-	render() {
-		return (
-			<h1>TestModule2, {this.props.text}</h1>
-		);
-	}
-}
-class TestModule3 extends React.Component {
-	render() {
-		return (
-			<h1>TestModule3, {this.props.text}</h1>
-		);
-	}
-}
-ReactDOM.render(React.createElement(
-	App, {
-		moduleInitial: 2,
-	}
-), document.getElementById("ewaiter-app"));
+
+ReactDOM.render(<App />, document.getElementById("ewaiter-app"));
