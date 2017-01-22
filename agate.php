@@ -43,10 +43,10 @@ try {
   }
 } catch (Exception $e){
   logIt($e->getMessage());
-  AppData::addOutput(VARNAME_ERROR,$e->getMessage());
+  AppData::addOutput(ACTION_SYSTEM,VARNAME_ERROR,$e->getMessage());
 } catch (Error $e){
   logIt($e->getMessage());
-  AppData::addOutput(VARNAME_ERROR,$e->getMessage());
+  AppData::addOutput(ACTION_SYSTEM,VARNAME_ERROR,$e->getMessage());
 };
 if($DB) $DB->close();
 AppData::postOutput();

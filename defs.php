@@ -16,6 +16,7 @@ define('SESSION_EXPIRES','1 HOUR');
 define('VARNAME_SESSION','ses');
 define('VARNAME_CLASS','cls');
 
+define('ACTION_SYSTEM','SYSTEM_INFO');
 define('VARNAME_ERROR','err');
 define('VARNAME_DEBUG','debug');
 ?>

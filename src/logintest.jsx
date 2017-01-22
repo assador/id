@@ -1,7 +1,7 @@
 'use strict';
 
-import LoginApp from './loginapp/LoginApp.jsx';
+import RootApp from './RootApp/RootApp.jsx';
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-ReactDOM.render(<LoginApp />, document.getElementById('loginapp'));
+ReactDOM.render(<RootApp />, document.getElementById('loginapp'));

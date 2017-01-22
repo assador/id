@@ -4,6 +4,8 @@
   "description": "ewaiter app",
   "main": "logintest.js",
   "dependencies": {
+    "flux": "^3.1.2",
+    "immutable": "^3.8.1",
     "react": "^15.4.2",
     "react-dom": "^15.4.2"
   },
@@ -19,7 +21,8 @@
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "./node_modules/.bin/webpack --config loginbuild.webpack.js"
+    "build": "./node_modules/.bin/webpack --config loginbuild.webpack.js",
+    "watch": "./node_modules/.bin/webpack --config loginbuild.webpack.js --watch"
   },
   "repository": {
     "type": "git",

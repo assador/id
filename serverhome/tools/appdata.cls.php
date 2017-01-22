@@ -13,12 +13,17 @@ class AppData {
       return null;
     }
   }
-  public static function setOutput($key,$value){
-    self::$output[$key]=$value;
+  /*
+  $action - это ID акции - like SET_MODULE (см. ServerApi.jsx)
+  $key - это поле в данных акции
+  $value - ...
+  */
+  public static function setOutput($action,$key,$value){
+    self::$output['actions'][$action][$key]=$value;
   }
-  public static function addOutput($key,$value){
-    if(empty(self::$output[$key])) self::$output[$key]='';
-    self::$output[$key].=$value;
+  public static function addOutput($action,$key,$value){
+    if(empty(self::$output[$action][$key])) self::$output[$action][$key]='';
+    self::$output['actions'][$action][$key].=$value;
   }
   public static function clearOutput(){
     self::$output=array();

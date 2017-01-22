@@ -1,3 +1,4 @@
+import LoginActions from './LoginActions.jsx';
 import React from 'react';
 
 class LoginForm extends React.Component {
@@ -13,6 +14,9 @@ class LoginForm extends React.Component {
 	handleSubmit(){
 		if(!this.emailObj.value || !this.pasObj.value) {
 			this.setState({'message':<h3>Обязательно укажите E-mail и Пароль</h3>});
+		} else {
+			console.log("Send Form!");
+			LoginActions.sendForm(this.emailObj.value,this.pasObj.value);
 		}
 	}
 

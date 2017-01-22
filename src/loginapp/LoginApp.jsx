@@ -1,63 +1,35 @@
+import {Container} from 'flux/utils';
+import LoginStore from './LoginStore.jsx';
+import LoginActions from './LoginActions.jsx';
 import LoginForm from './LoginForm.jsx';
 import LoginWait from './LoginWait.jsx';
-import React from 'react';
 
 class LoginApp extends React.Component {
-	constructor(props) {
-		super(props);
-    this.state={
-      session:localStorage.getItem('session'),
-      mode:'LoginWait',
-      destURL:'agate.php',
+    static getStores(){
+      return [LoginStore];
     }
-    this.onReceiveData = this.onReceiveData.bind(this);
-	}
 
-  onReceiveData(data){
-    if(data.rootmode){
-      this.setState({'mode':data.rootmode});
-    };
-    if(data.session){
-      this.setState({'session':data.session});
-      localStorage.setItem('session',data.session);
-    };
-  }
+    static calculateState(prevState){
+      return {
+        loginStore:LoginStore.getState()
+      }
+    }
 
-  componentDidMount() {
-    var _this=this;
-    $.ajax({
-          type:"POST",
-          url:this.state.destURL,
-          data:{
-            "cls":"home",
-            "ses":this.state.session
-          },
-          success:this.onReceiveData
-        });
-  }
+    componentDidMount(){
+      LoginActions.setMode('form');
+    }
 
-  componentWillUnmount() {
-
-  }
-
-	render() {
-		switch(this.state.mode){
-				case 'LoginForm':
-					return (
-						<LoginForm />
-					);
-				case 'LoginWait':
-					return (
-		      	<LoginWait />
-					);
-				default:
-					return (
-						<h1>Panic! Strange mode {this.state.mode}</h1>
-					);
-		}
-
-		const CustomTag = this.state.mode;
-	}
+    render (){
+      const mode=this.state.loginStore.get('mode');
+      switch(mode){
+        case 'form':
+          return <LoginForm/>
+        case 'loading':
+          return <LoginWait/>
+        default:
+          return <div>Panic, there is no {mode} cather</div>
+      }
+    }
 }
 
-export default LoginApp;
+export default Container.create(LoginApp);
