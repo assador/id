@@ -1,11 +1,15 @@
 export default class DevProps extends React.Component {
 	render() {
-		let propsList = [];
-		for(let key in this.props.data) {
-			propsList.push(<li key={key}>{key}: {this.props.data[key]}</li>);
-		}
 		return (
-			<ul>{propsList}</ul>
+			<ul>
+				{Object.keys(this.props.data).map(key =>
+					<li key={key}>{key}: {
+						typeof this.props.data[key] !== "object"
+							? this.props.data[key]
+							: <b>Object</b>
+					}</li>
+				)}
+			</ul>
 		);
 	}
 }

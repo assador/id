@@ -9,31 +9,45 @@ class App extends React.Component {
 		this.state = {
 			destURL: "/agate.php",
 			session: "",
-			module: this.props.initialModule,
-			moduleProp: this.props.initialModuleProp ? this.props.initialModuleProp : {},
+			modules: {},
+			moduleActiveId: "",
 		};
 	}
-	setAppModule(m, p) {
-		this.setState({module: m, moduleProp: p});
+	componentWillMount() {
+		this.setAppModule({
+			id: "TestModule1_0",
+			type: TestModule1,
+			props: {
+				prop1: "Какое-то свойство",
+				prop2: "Ещё какое-то свойство",
+			}
+		});
+	}
+	/**
+	 * Создаёт или, если уже создан, выбирает экземпляр модуля в хэше this.state.modules
+	 * В другом модуле (предварительно прокинув функцию в его props) вызывается так:
+	 * this.props.setAppModule({id: "<ID>", type: <CLASS>, props: {<PROPS>}, evt: <EVT>})
+	 */
+	setAppModule(p) {
+		let modules = this.state.modules;
+		if(!this.state.modules[p.id]) {
+			modules[p.id] = React.createElement(p.type, p.props);
+		}
+		this.setState({
+			modules: modules,
+			moduleActiveId: p.id,
+		});
 	}
 	render() {
-		let Module = this.state.module;
+		let activeModule = this.state.modules[this.state.moduleActiveId];
 		return (
 			<div>
-				<Header module={this.state.module} />
-				<Module {...this.state.moduleProp} />
+				<Header module={activeModule} moduleId={this.state.moduleActiveId} />
+				{activeModule}
 				<TestSwitcher setAppModule={this.setAppModule.bind(this)} />
 			</div>
 		);
 	}
 }
 
-ReactDOM.render(React.createElement(
-	App, {
-		initialModule: TestModule1,
-		initialModuleProp: {
-			prop1: "Какое-то свойство",
-			prop2: "Ещё какое-то свойство",
-		},
-	}
-), document.getElementById("ewaiter-app"));
+ReactDOM.render(<App />, document.getElementById("ewaiter-app"));
