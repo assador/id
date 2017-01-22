@@ -4,7 +4,6 @@ import ServerApi from '../ServerApi.jsx';
 
 const LoginActions = {
   setMode(mode){
-    console.log("Set mode:"+mode);
     RootDispatcher.dispatch({
       type: LoginActionTypes.LOGIN_SET_MODE,
       mode:mode,
