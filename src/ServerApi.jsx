@@ -53,7 +53,9 @@ RootDispatcher.dispatch({
 И все (все!) зарегистрированные Store их получают. И на нужные - реагируют.
 */
   onReceiveData(data){
+    console.log("onReceiveData");
     console.log(data);
+
     if(data.session && data.session!=this.session){
       this.session=data.session;
       localStorage.setItem('session',this.session);

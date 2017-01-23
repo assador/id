@@ -15,7 +15,6 @@ class LoginForm extends React.Component {
 		if(!this.emailObj.value || !this.pasObj.value) {
 			this.setState({'message':<h3>Обязательно укажите E-mail и Пароль</h3>});
 		} else {
-			console.log("Send Form!");
 			LoginActions.sendForm(this.emailObj.value,this.pasObj.value);
 		}
 	}

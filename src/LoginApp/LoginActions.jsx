@@ -1,6 +1,9 @@
 import LoginActionTypes from './LoginActionTypes.jsx';
 import RootDispatcher from '../Dispatcher.jsx';
 import ServerApi from '../ServerApi.jsx';
+import RootActions from '../ServerApi.jsx';
+import LoginStore from './LoginStore.jsx';
+//import RootStore from '../RootApp/RootStore.jsx';
 
 const LoginActions = {
   setMode(mode){
@@ -9,10 +12,11 @@ const LoginActions = {
       mode:mode,
     });
   },
+
   sendForm(login,password){
     this.setMode('loading');
     ServerApi.ask('login',{
-      'mode':'in',
+      'action':'in',
       'login':login,
       'password':password,
     });

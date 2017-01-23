@@ -16,6 +16,7 @@ class LoginApp extends React.Component {
     }
 
     componentDidMount(){
+      
       LoginActions.setMode('form');
     }
 

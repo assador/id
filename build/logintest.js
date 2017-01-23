@@ -11069,7 +11069,9 @@
 	  }, {
 	    key: 'onReceiveData',
 	    value: function onReceiveData(data) {
+	      console.log("onReceiveData");
 	      console.log(data);
+
 	      if (data.session && data.session != this.session) {
 	        this.session = data.session;
 	        localStorage.setItem('session', this.session);
@@ -11143,6 +11145,7 @@
 	  _createClass(LoginApp, [{
 	    key: 'componentDidMount',
 	    value: function componentDidMount() {
+
 	      _LoginActions2.default.setMode('form');
 	    }
 	  }, {
@@ -11234,8 +11237,10 @@
 	  }, {
 	    key: 'reduce',
 	    value: function reduce(state, action) {
+	      console.log("LoginStore");
+	      console.log(action);
 	      switch (action.type) {
-	        case _LoginActionTypes2.default.SET_FORM_MODE:
+	        case _LoginActionTypes2.default.LOGIN_SET_MODE:
 	          return state.set('mode', action.mode);
 	        default:
 	          return state;
@@ -11286,7 +11291,13 @@
 
 	var _ServerApi2 = _interopRequireDefault(_ServerApi);
 
+	var _LoginStore = __webpack_require__(56);
+
+	var _LoginStore2 = _interopRequireDefault(_LoginStore);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	//import RootStore from '../RootApp/RootStore.jsx';
 
 	var LoginActions = {
 	  setMode: function setMode(mode) {
@@ -11298,7 +11309,7 @@
 	  sendForm: function sendForm(login, password) {
 	    this.setMode('loading');
 	    _ServerApi2.default.ask('login', {
-	      'mode': 'in',
+	      'action': 'in',
 	      'login': login,
 	      'password': password
 	    });
@@ -11361,7 +11372,6 @@
 							'\u041E\u0431\u044F\u0437\u0430\u0442\u0435\u043B\u044C\u043D\u043E \u0443\u043A\u0430\u0436\u0438\u0442\u0435 E-mail \u0438 \u041F\u0430\u0440\u043E\u043B\u044C'
 						) });
 				} else {
-					console.log("Send Form!");
 					_LoginActions2.default.sendForm(this.emailObj.value, this.pasObj.value);
 				}
 			}

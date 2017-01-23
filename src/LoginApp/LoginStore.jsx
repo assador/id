@@ -14,8 +14,10 @@ class LoginStore extends ReduceStore {
   }
 
   reduce(state, action) {
+    console.log("LoginStore");
+    console.log(action);
     switch (action.type) {
-      case LoginActionTypes.SET_FORM_MODE:
+      case LoginActionTypes.LOGIN_SET_MODE:
         return state.set('mode',action.mode);
       default:
         return state;
