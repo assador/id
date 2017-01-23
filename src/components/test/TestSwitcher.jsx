@@ -1,5 +1,5 @@
-import TestModule1 from "./test.jsx";
-import TestModule2 from "./test2.jsx";
+import TestModule1 from "./TestModule1.jsx";
+import TestModule2 from "./TestModule2.jsx";
 
 export default class TestSwitcher extends React.Component {
 	render() {

@@ -7,13 +7,13 @@ class Login {
           $login=$_REQUEST['login'];
           $password=$_REQUEST['password'];
 
-          //AppData::setOutput("SET_ROOT_MODULE","cls","LoginApp");
+          AppData::setOutput("SET_APP_MODULE","cls","Login");
           AppData::setOutput("LOGIN_SET_MODE","mode","form");
         break;
         default:
           //AppData::addOutput("debug","waiting for solution");
           //show login form
-          AppData::setOutput("SET_ROOT_MODULE","cls","LoginApp");
+          AppData::setOutput("SET_APP_MODULE","cls","Login");
       }
     }
 }
