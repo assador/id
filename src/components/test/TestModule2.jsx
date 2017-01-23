@@ -1,4 +1,4 @@
-import DevProps from "../service/dev_props.jsx";
+import DevProps from "../service/DevProps.jsx";
 
 export default class TestModule2 extends React.Component {
 	render() {
