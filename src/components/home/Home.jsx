@@ -8,7 +8,16 @@ class Home extends React.Component {
 	constructor(props) {
 		super(props);
 	}
+	static getStores() {
+		return [HomeStore];
+	}
+	static calculateState(prevState) {
+		return {
+			homeStore: HomeStore.getState(),
+		}
+	}
 	render() {
+		console.dir(localStorage);
 		return (
 			<div>
 				<h1>Здесь Home залогинившегося админа</h1>

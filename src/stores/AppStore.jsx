@@ -3,7 +3,6 @@ import {ReduceStore} from "flux/utils";
 import AppActionTypes from "../constants/AppActionTypes.jsx";
 import AppDispatcher from "../Dispatcher.jsx";
 
-
 class AppStore extends ReduceStore {
 	constructor() {
 		super(AppDispatcher);

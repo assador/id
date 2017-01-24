@@ -11,6 +11,7 @@ class LoginStore extends ReduceStore {
 		return Immutable.Map({mode: "Form", message: ""});
 	}
 	reduce(state, action) {
+		console.dir(state);
 		switch(action.type) {
 			case LoginActionTypes.LOGIN_SET_MODE :
 				return state.set("mode", action.mode);
