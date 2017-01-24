@@ -1,2 +1,5 @@
 node_modules
 .DS_Store
+.babelrc
+package.json
+webpack.config.js
