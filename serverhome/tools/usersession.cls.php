@@ -99,5 +99,9 @@ class UserSession {
     return '';
   }
 
+  public function getRoles(){
+    return $this->data['roles'];
+  }
+
 }
 ?>
