@@ -72,8 +72,70 @@ class Login {
             if(!$found){
               throw new Exception('USER_WRONG');
             }
-
+//
             AppData::setOutput('SET_APP_MODULE','cls','Home');
+        break;
+        case 'testcreate':
+        case 'testdestroy':
+
+          $db=AppData::getItem('sysdb');
+
+          $tabUser=dbTableName('user');
+          $tabRole=dbTableName('user_role');
+
+          $testusers=array(
+              array(
+                "login"=>"1",
+                "password"=>"1",
+                "roles"=>array(
+                  array(
+                    "role"=>UserSession::SYS_ADMIN,
+                    "account_id"=>0,
+                    "caffe_id"=>0
+                  )
+                )
+              ),
+              array(
+                "login"=>"2",
+                "password"=>"2",
+                "roles"=>array(
+                  array(
+                    "role"=>UserSession::ACCOUNT_ADMIN,
+                    "account_id"=>1,
+                    "caffe_id"=>0
+                  )
+                )
+              ),
+              array(
+                "login"=>"3",
+                "password"=>"3",
+                "roles"=>array(
+                  array(
+                    "role"=>UserSession::CAFFE_ADMIN,
+                    "account_id"=>1,
+                    "caffe_id"=>1
+                  )
+                )
+              )
+          );
+
+            foreach($testusers as $user){
+              $sql='DELETE FROM '.$tabUser.' WHERE email="'.$db->real_escape_string($user['login']).'"';
+              echo $sql."<br>\r\n";
+              dbQuery($db,$sql);
+              if($action!="testcreate") continue;
+              $sql='INSERT INTO '.$tabUser.' (email,password,isblocked) values ("'.$db->real_escape_string($user['login']).'",unhex(sha2("'.$db->real_escape_string($user['password']).'",256)),0)';
+              echo $sql."<br>\r\n";
+              dbQuery($db,$sql);
+              if($db->insert_id) {
+                foreach($user['roles'] as $role){
+                  $sql='INSERT INTO '.$tabRole.' (role,user_id,account_id,caffe_id) values ("'.$role['role'].'",'.$db->insert_id.','.$role['account_id'].','.$role['caffe_id'].')';
+                  echo $sql."<br>\r\n";
+                  dbQuery($db,$sql);
+                }
+              }
+            }
+          exit();
         break;
         default:
           //AppData::addOutput("debug","waiting for solution");

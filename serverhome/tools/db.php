@@ -13,5 +13,14 @@ function dbTableName($name){
   return $name;
 }
 
+function dbQuery($db,$sql,$throwException=true){
+  $result=null;
+  $result=$db->query($sql);
+  if(!$result && $throwException){
+    throw new DBException('DB error:'.$db->errno.' '.$db->error,$db->errno);
+  }
+  return $result;
+}
+
 class DBException extends Exception {}
 ?>
