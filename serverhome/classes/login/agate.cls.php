@@ -2,14 +2,28 @@
 class Login {
     private $errors=array(
       'USER_BLOCKED'=>'Пользователь заблокирован',
-      'USER_WRONG'=>'Неправильный E-mail и/или пароль'
+      'USER_WRONG'=>'Неправильный E-mail и/или пароль',
+      'SHOULD_BE_LOGGED'=>'Чтобы отлогиниться вы должны быть залогиненным'
     );
 
     public function doAction($in){
+      try {
       $action=empty($in['action'])?'':$in['action'];
+
       switch ($action){
+        case 'out':
+          $session=AppData::getItem('session');
+          if($session->isLogged()){
+            $session->logout();
+            AppData::setSessionKey("");
+          } else {
+            throw new Exception('SHOULD_BE_LOGGED');
+          };
+          AppData::setOutput("LOGIN_SET_MODE","mode","Form");
+          AppData::setOutput("LOGIN_SET_MESSAGE","message",'');
+          AppData::setOutput("SET_APP_MODULE","cls","Login");
+        break;
         case 'in':
-          try {
             $tabUser=dbTableName('user');
             $tabSession=dbTableName('session');
 
@@ -49,7 +63,7 @@ class Login {
                 } else {
                   $session=AppData::getItem('session');
                   $sessionid=$session->create($row['id']);
-                  AppData::setSession($sessionid);
+                  AppData::setSessionKey($sessionid);
                 }
               }
               $result->close();
@@ -60,22 +74,24 @@ class Login {
             }
 
             AppData::setOutput('SET_APP_MODULE','cls','Home');
-
-          } catch (Exception $e){
-            $mes=$e->getMessage();
-            if(!empty($this->errors[$mes])){
-              AppData::setOutput("LOGIN_SET_MESSAGE","message",$this->errors[$mes]);
-            } else {
-              AppData::addError("Login process: ".$mes);
-            }
-            AppData::setOutput("LOGIN_SET_MODE","mode","Form");
-          }
         break;
         default:
           //AppData::addOutput("debug","waiting for solution");
           //show login form
+          AppData::setOutput("LOGIN_SET_MODE","mode","Form");
+          AppData::setOutput("LOGIN_SET_MESSAGE","message",'');
           AppData::setOutput("SET_APP_MODULE","cls","Login");
       }
+
+    } catch (Exception $e){
+      $mes=$e->getMessage();
+      if(!empty($this->errors[$mes])){
+        AppData::setOutput("LOGIN_SET_MESSAGE","message",$this->errors[$mes]);
+      } else {
+        AppData::addError("Login process: ".$mes);
+      }
+      AppData::setOutput("LOGIN_SET_MODE","mode","Form");
     }
+  }
 }
 ?>

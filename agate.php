@@ -47,11 +47,13 @@ try {
     $cls=new Login();
     $cls->doAction($_REQUEST);
   } else {
-    AppData::setSession($session);
+    AppData::setSessionKey($session->getSessionKey());
     $session->update();
     if($clsName=checkClsName($_REQUEST[VARNAME_CLASS])){
       $cls=new $clsName();
       $cls->doAction($_REQUEST);
+    } else {
+      throw new Exception("there is no class for ".$_REQUEST[VARNAME_CLASS]);
     }
   }
 } catch (Exception $e){

@@ -51,10 +51,11 @@ class ServerApi {
  * И все (все!) зарегистрированные Store их получают. И на нужные — реагируют.
 */
 	onReceiveData(data) {
-		console.log(data);
-		if(data.session && data.session != this.session) {
-			this.session = data.session;
-			localStorage.setItem("session", this.session);
+		//console.log("DATA RECEIVED!");
+		//console.log(data);
+		if(data.session && data.session != this._session) {
+			this._session = data.session;
+			localStorage.setItem("session", this._session);
 		};
 		if(data.actions) {
 			for(var action in data.actions) {

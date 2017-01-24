@@ -9,7 +9,7 @@ const AppActions = {
 	*/
 	loadModule(cls, data) {
 		ServerApi.ask(cls, data);
-		this.setModule("Loading");
+		AppActions.setModule("Loading");
 	},
 	setModule(cls, data) {
 		AppDispatcher.dispatch({
@@ -17,6 +17,10 @@ const AppActions = {
 			cls: cls,
 			data: data,
 		});
+	},
+	logOut() {
+		ServerApi.ask('login',{'action':'out'});
+		AppActions.setModule("Loading");
 	}
 };
 

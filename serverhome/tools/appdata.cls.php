@@ -5,8 +5,8 @@ class AppData {
   private static $output=array();
   private static $session="";
 
-  public static function setSession($session){
-    self::$session=$session;
+  public static function setSessionKey($sessionkey){
+    self::$session=$sessionkey;
   }
 
   public static function setItem($key,$value){

@@ -12,21 +12,21 @@ class UserSession {
     $db=AppData::getItem('sysdb');
     $tabUser=dbTableName('user');
     $tabSession=dbTableName('session');
-    $sql='SELECT t1.id,t1.email,t1.isblocked,hex(t2.sessionkey) as session FROM '.$tabUser.' as t1, '.$tabSession.' as t2 WHERE t2.sessionkey=unhex("'.$db->escape_string($key).'") and t2.expires>NOW() and t1.id=t2.user_id limit 1';
+    $sql='SELECT t1.id,t1.email,t1.isblocked,hex(t2.sessionkey) as sessionid FROM '.$tabUser.' as t1, '.$tabSession.' as t2 WHERE t2.sessionkey=unhex("'.$db->escape_string($key).'") and t2.expires>NOW() and t1.id=t2.user_id limit 1';
     if($result=$db->query($sql)){
       while($row=$result->fetch_assoc()){
         $this->data['id']=$row['id'];
         $this->data['email']=$row['email'];
         $this->data['isblocked']=$row['isblocked'];
-        $this->data['session']=$row['session'];
+        $this->data['session']=$row['sessionid'];
         if($this->data['isblocked']==1){
           $this->data['islogged']=false;
         } else {
           $this->data['islogged']=true;
-          $tabRole=dbTableName('role');
+          $tabRole=dbTableName('user_role');
           $sql='SELECT role,account_id,caffe_id FROM '.$tabRole.' WHERE user_id='.$row['id'];
           if($resultRole=$db->query($sql)){
-            while($row=$resultRole->fetch_row()){
+            while($row=$resultRole->fetch_assoc()){
               $this->data['roles'][]=array('role'=>$row['role'],'account_id'=>$row['account_id'],'caffe_id'=>$row['caffe_id']);
             }
             $resultRole->close();
@@ -35,6 +35,7 @@ class UserSession {
       };
       $result->close();
     }
+    return $this->data['islogged'];
   }
 
   public function create($userid){
@@ -56,6 +57,17 @@ class UserSession {
     return $sessionid;
   }
 
+  public function logout(){
+    if($this->data['islogged'] && $this->data['session']){
+      $db=AppData::getItem('sysdb');
+      $tabSession=dbTableName('session');
+      $sql='DELETE FROM '.$tabSession.' WHERE sessionkey=unhex("'.$this->data['session'].'")';
+      $db->query($sql);
+      $this->data=$data=array('islogged'=>false,'roles'=>array());
+    }
+  }
+
+
   public function checkRole($role){
     if($this->data['islogged'])
       foreach($this->data['roles'] as $data)
@@ -67,22 +79,22 @@ class UserSession {
   public function update(){
     if($this->data['islogged']){
         $db=AppData::getItem('sysdb');
-        $db->query('UPDATE '.dbTableName('session').' SET expires=DATE_ADD(NOW(), '.SESSION_EXPIRES.') WHERE id='.$this->data['sessionid']);
+        $db->query('UPDATE '.dbTableName('session').' SET expires=NOW()+INTERVAL '.SESSION_EXPIRES.' WHERE sessionkey=unhex("'.$this->data['session'].'")');
         if($db->errno)
           throw new DBException('DB error:'.$db->errno.' '.$db->error,$db->errno);
     }
   }
 
   public function isLogged(){
-    if(!empty($this->data['logged']) && $this->data['logged']===true){
+    if(!empty($this->data['islogged']) && $this->data['islogged']===true){
       return true;
     }
     return false;
   }
 
-  public function getSessionid(){
-    if(!empty($this->data['logged']) && $this->data['logged']===true && !empty($this->data['sessionid'])){
-      return $this->data['sessionid'];
+  public function getSessionKey(){
+    if(!empty($this->data['islogged']) && $this->data['islogged']===true && !empty($this->data['session'])){
+      return $this->data['session'];
     }
     return '';
   }

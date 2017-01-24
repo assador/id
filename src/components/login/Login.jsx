@@ -6,10 +6,6 @@ import LoginForm from "./LoginForm.jsx";
 import LoginWait from "./LoginWait.jsx";
 
 class Login extends React.Component {
-	constructor(props){
-		super(props);
-		//LoginActions.setMode("Form");
-	}
 	static getStores() {
 		return [LoginStore];
 	}
@@ -17,6 +13,9 @@ class Login extends React.Component {
 		return {
 			loginStore: LoginStore.getState(),
 		}
+	}
+	componentWillUnmount(){
+		//LoginActions.setMode('Form');
 	}
 
 	render() {
