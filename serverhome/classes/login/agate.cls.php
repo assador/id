@@ -1,5 +1,6 @@
 ﻿<?php
 class Login {
+    const DEF_ROLES_OUT_ACTION='SET_APP_ROLES';
     private $errors=array(
       'USER_BLOCKED'=>'Пользователь заблокирован',
       'USER_WRONG'=>'Неправильный E-mail и/или пароль',
@@ -19,6 +20,8 @@ class Login {
           } else {
             throw new Exception('SHOULD_BE_LOGGED');
           };
+
+          AppData::setOutput(self::DEF_ROLES_OUT_ACTION,'roles',$session->getRoles());
           AppData::setOutput("LOGIN_SET_MODE","mode","Form");
           AppData::setOutput("LOGIN_SET_MESSAGE","message",'');
           AppData::setOutput("SET_APP_MODULE","cls","Login");
@@ -63,6 +66,7 @@ class Login {
                 } else {
                   $session=AppData::getItem('session');
                   $sessionid=$session->create($row['id']);
+                  AppData::setOutput(self::DEF_ROLES_OUT_ACTION,'roles',$session->getRoles());
                   AppData::setSessionKey($sessionid);
                 }
               }
@@ -72,8 +76,13 @@ class Login {
             if(!$found){
               throw new Exception('USER_WRONG');
             }
-//
+
             AppData::setOutput('SET_APP_MODULE','cls','Home');
+        break;
+        case 'roles':
+          $actionout=(empty($_REQUEST['actionout']))?self::DEF_ROLES_OUT_ACTION:$_REQUEST['actionout'];
+          $session=AppData::getItem('session');
+          AppData::setOutput($actionout,'roles',$session->getRoles());
         break;
         case 'testcreate':
         case 'testdestroy':
