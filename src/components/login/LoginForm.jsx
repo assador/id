@@ -5,16 +5,15 @@ class LoginForm extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			message: "",
+			message: this.props.message,
 		}
 		this.handleSubmit = this.handleSubmit.bind(this);
 		this.handleChange = this.handleChange.bind(this);
 	}
 	handleSubmit() {
 		if(!this.emailObj.value || !this.pasObj.value) {
-			this.setState({message: <h3>Обязательно укажите E-mail и Пароль!</h3>});
+			this.setState({message: "Обязательно укажите E-mail и Пароль!"});
 		} else {
-			console.log("Send Form!");
 			LoginActions.sendForm(this.emailObj.value, this.pasObj.value);
 		}
 	}
@@ -24,6 +23,10 @@ class LoginForm extends React.Component {
 		}
 	}
 	render() {
+		let message='';
+		if(this.state.message){
+			message=<small>{this.state.message}<br/><br/></small>;
+		}
 		return (
 			<div className="container-fluid">
 				<div className="row">
@@ -48,7 +51,7 @@ class LoginForm extends React.Component {
 									placeholder="Пароль"
 								/>
 							</div>
-							{this.state.message}
+							{message}
 							<div className="form-group">
 								<button
 									type="button"

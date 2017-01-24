@@ -1,10 +1,21 @@
 <?php
+require 'defs.php';
+require HOME.'/tools/appdata.cls.php';
+function myErrorHandler($errno, $errstr, $errfile, $errline){
+/*
+    if (!(error_reporting() & $errno)) {
+        return false;
+    }
+*/
+    throw new Exception('PHP error:'.$errstr." on line $errline in file $errfile",$errno);
+    /* Don't execute PHP internal error handler */
+    return true;
+}
+$old_error_handler = set_error_handler("myErrorHandler");
 
 try {
-  require 'defs.php';
   require HOME.'/tools/log.php';
   require HOME.'/tools/db.php';
-  require HOME.'/tools/appdata.cls.php';
 
   function checkClsName($clsName){
     $clsName=preg_replace('/\W/im','',$clsName);
@@ -28,6 +39,7 @@ try {
 
   $DB=dbConnect(DBSERVER,DBUSER,DBPASSWORD,DBNAME,CODEPAGE);
   AppData::setItem('sysdb',$DB);
+
   $session=new UserSession();
   AppData::setItem('session',$session);
   if(empty($_REQUEST[VARNAME_SESSION]) || !$session->check($_REQUEST[VARNAME_SESSION])){
@@ -35,6 +47,7 @@ try {
     $cls=new Login();
     $cls->doAction($_REQUEST);
   } else {
+    AppData::setSession($session);
     $session->update();
     if($clsName=checkClsName($_REQUEST[VARNAME_CLASS])){
       $cls=new $clsName();
@@ -42,11 +55,9 @@ try {
     }
   }
 } catch (Exception $e){
-  logIt($e->getMessage());
-  AppData::addOutput(ACTION_SYSTEM,VARNAME_ERROR,$e->getMessage());
+  AppData::addError($e->getMessage());
 } catch (Error $e){
-  logIt($e->getMessage());
-  AppData::addOutput(ACTION_SYSTEM,VARNAME_ERROR,$e->getMessage());
+  AppData::addError($e->getMessage().' in '.$e->getFile().' on '.$e->getLine());
 };
 if($DB) $DB->close();
 AppData::postOutput();

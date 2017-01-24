@@ -1,3 +1,4 @@
+import React from "react";
 import {Container} from "flux/utils";
 import LoginStore from "../../stores/LoginStore.jsx";
 import LoginActions from "../../actions/LoginActions.jsx";
@@ -5,6 +6,10 @@ import LoginForm from "./LoginForm.jsx";
 import LoginWait from "./LoginWait.jsx";
 
 class Login extends React.Component {
+	constructor(props){
+		super(props);
+		//LoginActions.setMode("Form");
+	}
 	static getStores() {
 		return [LoginStore];
 	}
@@ -13,15 +18,14 @@ class Login extends React.Component {
 			loginStore: LoginStore.getState(),
 		}
 	}
-	componentDidMount() {
-		LoginActions.setMode("form");
-	}
+
 	render() {
 		const mode = this.state.loginStore.get("mode");
 		switch(mode) {
-			case "form" :
-				return <LoginForm />
-			case "loading" :
+			case "Form" :
+				const message = this.state.loginStore.get("message");
+				return <LoginForm message={message}/>
+			case "Loading" :
 				return <LoginWait />
 			default :
 				return <div>Panic, there is no {mode} cather.</div>

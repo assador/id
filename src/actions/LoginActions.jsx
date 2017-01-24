@@ -9,10 +9,17 @@ const LoginActions = {
 			mode: mode,
 		});
 	},
+	setMessage(message) {
+		AppDispatcher.dispatch({
+			type: LoginActionTypes.LOGIN_SET_MESSAGE,
+			message: message,
+		});
+	},
 	sendForm(login, password) {
-		this.setMode("loading");
+		this.setMode("Loading");
+
 		ServerApi.ask("login", {
-			"mode": "in",
+			"action": "in",
 			"login": login,
 			"password": password,
 		});

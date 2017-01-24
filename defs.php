@@ -8,7 +8,7 @@ define('HOME','serverhome');
 define('CACHE','cache');
 define('IMG','img');
 
-define('LOGFILE',CACHE.'/_log.log');
+define('LOGFILE','../_log.log');
 define('CODEPAGE','utf8');
 
 define('SESSION_EXPIRES','1 HOUR');

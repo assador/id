@@ -51,17 +51,22 @@ class ServerApi {
  * И все (все!) зарегистрированные Store их получают. И на нужные — реагируют.
 */
 	onReceiveData(data) {
-		console.dir(data);
+		console.log(data);
 		if(data.session && data.session != this.session) {
 			this.session = data.session;
 			localStorage.setItem("session", this.session);
 		};
 		if(data.actions) {
 			for(var action in data.actions) {
-				var data = data.actions[action];
+				var actionData = data.actions[action];
+				if(action=='SYSTEM_INFO'){
+					if(actionData.debug) console.log("DEBUG: "+actionData.debug);
+					if(actionData.err) console.log("ERROR: "+actionData.err);
+					continue;
+				};
 				var message = {};
-				for(var fld in data) {
-					message[fld] = data[fld];
+				for(var fld in actionData) {
+					message[fld] = actionData[fld];
 				};
 				message["type"] = action;
 				AppDispatcher.dispatch(message);

@@ -2,6 +2,7 @@ import {Container} from "flux/utils";
 import AppStore from "../stores/AppStore.jsx";
 import AppActions from "../actions/AppActions.jsx";
 import Login from "./login/Login.jsx";
+import Home from "./home/Home.jsx";
 
 /* Это компонент рута */
 
@@ -37,6 +38,8 @@ class App extends React.Component {
 				return <div>Not inited yet.</div>
 			case "Login" :
 				return <Login />
+			case "Home" :
+				return <Home />
 			default :
 				return <div>Panic, there is no {cls} cather.</div>
 		}

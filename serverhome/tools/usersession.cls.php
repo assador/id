@@ -2,7 +2,7 @@
 
 class UserSession {
 
-  const SYS_ADMIN='sys';
+  const SYS_ADMIN='system';
   const ACCOUNT_ADMIN='account';
   const CAFFE_ADMIN='caffe';
 
@@ -12,13 +12,13 @@ class UserSession {
     $db=AppData::getItem('sysdb');
     $tabUser=dbTableName('user');
     $tabSession=dbTableName('session');
-    $sql='SELECT t1.id,t1.email,t1.isblocked,t2.id as sessionid FROM '.$tabUser.' as t1, '.$tabSession.' as t2 WHERE t2.sessionkey="'.$db->escape_string($key).'" and t2.expires>NOW() and t1.id=t2.user_id limit 1';
+    $sql='SELECT t1.id,t1.email,t1.isblocked,hex(t2.sessionkey) as session FROM '.$tabUser.' as t1, '.$tabSession.' as t2 WHERE t2.sessionkey=unhex("'.$db->escape_string($key).'") and t2.expires>NOW() and t1.id=t2.user_id limit 1';
     if($result=$db->query($sql)){
-      while($row=$result->fetch_row()){
+      while($row=$result->fetch_assoc()){
         $this->data['id']=$row['id'];
         $this->data['email']=$row['email'];
         $this->data['isblocked']=$row['isblocked'];
-        $this->data['sessionid']=$row['sessionid'];
+        $this->data['session']=$row['session'];
         if($this->data['isblocked']==1){
           $this->data['islogged']=false;
         } else {
@@ -35,6 +35,25 @@ class UserSession {
       };
       $result->close();
     }
+  }
+
+  public function create($userid){
+    $sessionid='';
+    $db=AppData::getItem('sysdb');
+    $tabSession=dbTableName('session');
+    $sql='select md5("'.uniqid(time()).'") as sessionid';
+    if($result=$db->query($sql)){
+      while($row=$result->fetch_assoc()){
+        $sessionid=$row['sessionid'];
+        $sql='INSERT INTO '.$tabSession.' (user_id,sessionkey,created,expires,ip) values ('.$userid.',unhex("'.$sessionid.'"),NOW(),NOW() + interval '.SESSION_EXPIRES.',INET6_ATON("'.$db->real_escape_string($_SERVER['REMOTE_ADDR']).'"))';
+        $db->query($sql);
+        $sql='DELETE FROM '.$tabSession.' WHERE user_id='.$userid.' AND sessionkey not in (unhex("'.$sessionid.'"))';
+        $db->query($sql);
+      };
+      $result->close();
+    }
+    if($sessionid) $this->check($sessionid);
+    return $sessionid;
   }
 
   public function checkRole($role){
@@ -60,5 +79,13 @@ class UserSession {
     }
     return false;
   }
+
+  public function getSessionid(){
+    if(!empty($this->data['logged']) && $this->data['logged']===true && !empty($this->data['sessionid'])){
+      return $this->data['sessionid'];
+    }
+    return '';
+  }
+
 }
 ?>
