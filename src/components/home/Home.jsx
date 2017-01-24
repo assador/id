@@ -3,6 +3,7 @@ import {Container} from "flux/utils";
 import HomeStore from "../../stores/HomeStore.jsx";
 import HomeActions from "../../actions/HomeActions.jsx";
 import AppActions from "../../actions/AppActions.jsx";
+import DevProps from "../service/DevProps.jsx";
 
 class Home extends React.Component {
 	constructor(props) {
@@ -17,10 +18,11 @@ class Home extends React.Component {
 		}
 	}
 	render() {
-		console.dir(localStorage);
 		return (
 			<div>
-				<h1>Здесь Home залогинившегося админа</h1>
+				<h1>Home залогинившегося</h1>
+				<h2>Home.props (отладка)</h2>
+				<DevProps data={this.props} />
 				<button onClick={AppActions.logOut}>Отлогиниться</button>
 			</div>
 		);

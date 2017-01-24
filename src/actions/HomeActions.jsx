@@ -3,11 +3,13 @@ import AppDispatcher from "../Dispatcher.jsx";
 import ServerApi from "../ServerApi.jsx";
 
 const HomeActions = {
+/*
 	getRole() {
 		AppDispatcher.dispatch({
-			type: HomeActionTypes.HOME_GET_ROLE,
+			type: HomeActionTypes.,
 		});
 	},
+*/
 };
 
 export default HomeActions;

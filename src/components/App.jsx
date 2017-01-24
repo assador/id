@@ -39,7 +39,7 @@ class App extends React.Component {
 			case "Login" :
 				return <Login />
 			case "Home" :
-				return <Home />
+				return <Home user={this.state.appStore.get("roles")} />
 			default :
 				return <div>Panic, there is no {cls} cather.</div>
 		}

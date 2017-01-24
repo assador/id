@@ -14,6 +14,8 @@ class AppStore extends ReduceStore {
 		switch(action.type) {
 			case AppActionTypes.SET_APP_MODULE :
 				return state.set("cls", action.cls);
+			case AppActionTypes.SET_APP_ROLES :
+				return state.set("roles", action.roles);
 			default :
 				return state;
 		}

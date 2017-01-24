@@ -8,12 +8,10 @@ class HomeStore extends ReduceStore {
 		super(AppDispatcher);
 	}
 	getInitialState() {
-		return Immutable.Map({cls: ""});
+		return Immutable.Map({});
 	}
 	reduce(state, action) {
 		switch(action.type) {
-			case HomeActionTypes.HOME_GET_ROLE :
-				return state.set("cls", action.cls);
 			default :
 				return state;
 		}
