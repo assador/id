@@ -8,17 +8,14 @@ class LoginStore extends ReduceStore {
 		super(AppDispatcher);
 	}
 	getInitialState() {
-		return Immutable.Map({'mode':'Form','message':''});
+		return Immutable.Map({mode: "Form", message: ""});
 	}
 	reduce(state, action) {
 		switch(action.type) {
-
 			case LoginActionTypes.LOGIN_SET_MODE :
 				return state.set("mode", action.mode);
-
 			case LoginActionTypes.LOGIN_SET_MESSAGE :
 				return state.set("message", action.message);
-
 			default :
 				return state;
 		}

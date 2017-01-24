@@ -1,5 +1,5 @@
-import LoginActions from "../../actions/LoginActions.jsx";
 import React from "react";
+import LoginActions from "../../actions/LoginActions.jsx";
 
 class LoginForm extends React.Component {
 	constructor(props) {

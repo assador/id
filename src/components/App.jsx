@@ -34,7 +34,7 @@ class App extends React.Component {
 		switch(cls) {
 			case "Loading" :
 				return <div>Loading…</div>
-			case "":
+			case "" :
 				return <div>Not inited yet.</div>
 			case "Login" :
 				return <Login />

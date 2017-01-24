@@ -4,7 +4,7 @@ import ServerApi from "../ServerApi.jsx";
 
 const AppActions = {
 	/**
-	 * cls — is an ID of requested modeule
+	 * cls — is an ID of requested module
 	 * data — is an Object with params to send {'param1': 'val1', 'param2': 'val2'...}
 	*/
 	loadModule(cls, data) {
@@ -19,7 +19,7 @@ const AppActions = {
 		});
 	},
 	logOut() {
-		ServerApi.ask('login',{'action':'out'});
+		ServerApi.ask("login", {action: "out"});
 		AppActions.setModule("Loading");
 	}
 };

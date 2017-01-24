@@ -56,19 +56,19 @@ class ServerApi {
 		if(data.session && data.session != this._session) {
 			this._session = data.session;
 			localStorage.setItem("session", this._session);
-		};
+		}
 		if(data.actions) {
 			for(var action in data.actions) {
 				var actionData = data.actions[action];
-				if(action=='SYSTEM_INFO'){
-					if(actionData.debug) console.log("DEBUG: "+actionData.debug);
-					if(actionData.err) console.log("ERROR: "+actionData.err);
+				if(action == "SYSTEM_INFO") {
+					if(actionData.debug) console.log("DEBUG: " + actionData.debug);
+					if(actionData.err) console.log("ERROR: " + actionData.err);
 					continue;
-				};
+				}
 				var message = {};
 				for(var fld in actionData) {
 					message[fld] = actionData[fld];
-				};
+				}
 				message["type"] = action;
 				AppDispatcher.dispatch(message);
 			}
