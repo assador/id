@@ -3,8 +3,11 @@ import AppStore from "../stores/AppStore.jsx";
 import AppActions from "../actions/AppActions.jsx";
 import Login from "./login/Login.jsx";
 import Home from "./home/Home.jsx";
+import StoresPool from '../StoresPool.jsx';
 
 /* Это компонент рута */
+/*А так мы создаем ему Store, который не собираемся убивать*/
+StoresPool.create('App',AppStore);
 
 class App extends React.Component {
 	/**
@@ -13,11 +16,11 @@ class App extends React.Component {
 	 * что использует AppStore и что наше state — забирается из AppState.getState()
 	*/
 	static getStores() {
-		return [AppStore];
+		return StoresPool.arr('App');
 	}
 	static calculateState(prevState) {
 		return {
-			appStore: AppStore.getState(),
+			appStore: StoresPool.item('App').getState(),
 		}
 	}
 	/**

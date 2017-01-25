@@ -8,18 +8,26 @@ class LoginStore extends ReduceStore {
 		super(AppDispatcher);
 	}
 	getInitialState() {
-		return Immutable.Map({mode: "Form", message: ""});
+		return Immutable.Map({mode: "Form", message: "",email:""});
 	}
 	reduce(state, action) {
 		switch(action.type) {
-			case LoginActionTypes.LOGIN_SET_MODE :
-				return state.set("mode", action.mode);
-			case LoginActionTypes.LOGIN_SET_MESSAGE :
-				return state.set("message", action.message);
+			case LoginActionTypes.LOGIN_SET_DATA :
+				let ret=state;
+				let d=action.data;
+				for(var o in d){
+					ret=ret.set(o,d[o])
+				}
+				return ret;
 			default :
 				return state;
 		}
 	}
 }
 
-export default new LoginStore();
+/*
+Здесь мы возвращаем класc, а не инстанс. Потому что собираемся использовать
+его в StoresPool
+*/
+
+export default LoginStore;

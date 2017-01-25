@@ -8,7 +8,7 @@ class AppStore extends ReduceStore {
 		super(AppDispatcher);
 	}
 	getInitialState() {
-		return Immutable.Map({cls: ""});
+		return Immutable.Map({cls: "",roles:[]});
 	}
 	reduce(state, action) {
 		switch(action.type) {
@@ -22,4 +22,4 @@ class AppStore extends ReduceStore {
 	}
 }
 
-export default new AppStore();
+export default AppStore;
