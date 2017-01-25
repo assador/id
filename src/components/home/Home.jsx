@@ -18,9 +18,14 @@ class Home extends React.Component {
 		}
 	}
 	render() {
+		console.dir(this.state.homeStore.get("components"));
+		let activeModule = this.state.homeStore.get("components")[this.state.homeStore.get("componentActiveId")];
 		return (
 			<div>
 				<h1>Home залогинившегося</h1>
+				<button onClick={evt => HomeActions.addHomeModule(this.state.homeStore.get("modules")[0], evt)}>Кнопка 1</button>
+				<button onClick={evt => HomeActions.addHomeModule(this.state.homeStore.get("modules")[1], evt)}>Кнопка 2</button>
+				{activeModule}
 				<h2>Home.props (отладка)</h2>
 				<DevProps data={this.props} />
 				<button onClick={AppActions.logOut}>Отлогиниться</button>
@@ -29,4 +34,4 @@ class Home extends React.Component {
 	}
 }
 
-export default Home;
+export default Container.create(Home);
