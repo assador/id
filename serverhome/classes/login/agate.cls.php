@@ -20,10 +20,7 @@ class Login {
           } else {
             throw new Exception('SHOULD_BE_LOGGED');
           };
-
           AppData::setOutput(self::DEF_ROLES_OUT_ACTION,'roles',$session->getRoles());
-          AppData::setOutput("LOGIN_SET_MODE","mode","Form");
-          AppData::setOutput("LOGIN_SET_MESSAGE","message",'');
           AppData::setOutput("SET_APP_MODULE","cls","Login");
         break;
         case 'in':
@@ -76,7 +73,6 @@ class Login {
             if(!$found){
               throw new Exception('USER_WRONG');
             }
-
             AppData::setOutput('SET_APP_MODULE','cls','Home');
         break;
         case 'roles':
@@ -149,19 +145,19 @@ class Login {
         default:
           //AppData::addOutput("debug","waiting for solution");
           //show login form
-          AppData::setOutput("LOGIN_SET_MODE","mode","Form");
-          AppData::setOutput("LOGIN_SET_MESSAGE","message",'');
+          //AppData::setOutput("LOGIN_SET_DATA","data",array('mode'=>'Form','message'=>''));
           AppData::setOutput("SET_APP_MODULE","cls","Login");
       }
 
     } catch (Exception $e){
       $mes=$e->getMessage();
+      $state=array('mode'=>'Form');
       if(!empty($this->errors[$mes])){
-        AppData::setOutput("LOGIN_SET_MESSAGE","message",$this->errors[$mes]);
+        $state['message']=$this->errors[$mes];
       } else {
         AppData::addError("Login process: ".$mes);
       }
-      AppData::setOutput("LOGIN_SET_MODE","mode","Form");
+      AppData::setOutput("LOGIN_SET_DATA","data",$state);
     }
   }
 }

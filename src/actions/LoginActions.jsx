@@ -3,20 +3,17 @@ import AppDispatcher from "../Dispatcher.jsx";
 import ServerApi from "../ServerApi.jsx";
 
 const LoginActions = {
-	setMode(mode) {
+	setData(data) {
 		AppDispatcher.dispatch({
-			type: LoginActionTypes.LOGIN_SET_MODE,
-			mode: mode,
-		});
-	},
-	setMessage(message) {
-		AppDispatcher.dispatch({
-			type: LoginActionTypes.LOGIN_SET_MESSAGE,
-			message: message,
+			type: LoginActionTypes.LOGIN_SET_DATA,
+			data: data,
 		});
 	},
 	sendForm(login, password) {
-		this.setMode("Loading");
+		this.setData({
+			mode:'Loading',
+			email:login
+		})
 
 		ServerApi.ask("login", {
 			"action": "in",

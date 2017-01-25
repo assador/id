@@ -8,8 +8,9 @@ class LoginWait extends React.Component {
 		return (
 			<div className="container-fluid">
 				<div className="row">
-					<div className="col-lg-12">
-						<h1>Подождите…</h1>
+					<div className="col-lg-6 col-lg-offset-3">
+						<h1>Вход</h1>
+						<h3>Подождите…</h3>
 					</div>
 				</div>
 			</div>

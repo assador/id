@@ -1,29 +1,43 @@
 import React from "react";
 import {Container} from "flux/utils";
 import LoginStore from "../../stores/LoginStore.jsx";
-import LoginActions from "../../actions/LoginActions.jsx";
 import LoginForm from "./LoginForm.jsx";
 import LoginWait from "./LoginWait.jsx";
+import StoresPool from '../../StoresPool.jsx';
+/*
+Здесь мы создаем LoginStore динамически - при создании экземпляра
+Это имеет смысл поскольку мы хотим удалять LoginStore когда Login не будет активен
+*/
 
 class Login extends React.Component {
+	constructor(props){
+		super(props);
+/*
+Cоздаем Store
+*/
+		StoresPool.create('Login',LoginStore);
+	}
 	static getStores() {
-		return [LoginStore];
+		return StoresPool.arr('Login');
 	}
 	static calculateState(prevState) {
 		return {
-			loginStore: LoginStore.getState(),
+			loginStore: StoresPool.item('Login').getState(),
 		}
 	}
 	componentWillUnmount(){
-		//LoginActions.setMode('Form');
+/*
+Удаляем Store
+*/
+		StoresPool.remove('Login');
 	}
-
 	render() {
 		const mode = this.state.loginStore.get("mode");
 		switch(mode) {
 			case "Form" :
 				const message = this.state.loginStore.get("message");
-				return <LoginForm message={message}/>
+				const email = this.state.loginStore.get("email");
+				return <LoginForm message={message} email={email}/>
 			case "Loading" :
 				return <LoginWait />
 			default :
