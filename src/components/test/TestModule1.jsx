@@ -17,6 +17,7 @@ export default class TestModule1 extends React.Component {
 		};
 	}
 	addremoveModuleState(p) {
+/*
 		let states = this.state.states;
 		if(typeof p.remove !== "undefined") {
 			delete states[p.remove];
@@ -28,6 +29,8 @@ export default class TestModule1 extends React.Component {
 			/>;
 		}
 		this.setState({states: states, lastId: this.state.lastId + 1});
+*/
+		this.setState({lastId: this.state.lastId + 1});
 	}
 	setModuleState(p) {
 		if(typeof p.key !== "undefined" && typeof p.value !== "undefined") {
@@ -42,12 +45,11 @@ export default class TestModule1 extends React.Component {
 		}
 	}
 	componentWillMount() {
-		this.addremoveModuleState({});
+//		this.addremoveModuleState({});
 	}
 	render() {
 		return (
 			<div>
-				<div>&lt;Активный модуль&gt;</div>
 				<h3>TestModule1.props:</h3>
 				<DevProps data={this.props} />
 				<h3>Редактирование TestModule1.state:</h3>

@@ -26,8 +26,8 @@ class LoginStore extends ReduceStore {
 }
 
 /*
-Здесь мы возвращаем класc, а не инстанс. Потому что собираемся использовать
-его в StoresPool
+Здесь мы возвращаем класc, а не инстанс.
+Потому что собираемся использовать его в StoresPool.
 */
 
 export default LoginStore;
