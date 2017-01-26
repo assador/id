@@ -2,13 +2,7 @@
 require 'defs.php';
 require HOME.'/tools/appdata.cls.php';
 function myErrorHandler($errno, $errstr, $errfile, $errline){
-/*
-    if (!(error_reporting() & $errno)) {
-        return false;
-    }
-*/
     throw new Exception('PHP error:'.$errstr." on line $errline in file $errfile",$errno);
-    /* Don't execute PHP internal error handler */
     return true;
 }
 $old_error_handler = set_error_handler("myErrorHandler");
@@ -47,7 +41,6 @@ try {
     $cls=new Login();
     $cls->doAction($_REQUEST);
   } else {
-    AppData::setSessionKey($session->getSessionKey());
     $session->update();
     if($clsName=checkClsName($_REQUEST[VARNAME_CLASS])){
       $cls=new $clsName();

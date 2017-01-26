@@ -16,7 +16,6 @@ class Login {
           $session=AppData::getItem('session');
           if($session->isLogged()){
             $session->logout();
-            AppData::setSessionKey("");
           } else {
             throw new Exception('SHOULD_BE_LOGGED');
           };
@@ -35,24 +34,6 @@ class Login {
 
             $db=AppData::getItem('sysdb');
 
-//Let's create new user while the DB is Empty
-            $sql='SELECT count(*) as cnt FROM '.$tabUser;
-            if($result=$db->query($sql)){
-              while($row=$result->fetch_assoc()){
-                if($row['cnt']==0){
-                    $sql='INSERT INTO '.$tabUser.' (email,password,isblocked) values ("'.$db->real_escape_string($login).'",unhex(sha2("'.$db->real_escape_string($password).'",256)),0)';
-                    $db->query($sql);
-
-                    if($db->insert_id) {
-                      $tabRole=dbTableName('user_role');
-                      $sql='INSERT INTO '.$tabRole.' (role,user_id,account_id,caffe_id) values ("system",'.$db->insert_id.',0,0)';
-                      $db->query($sql);
-                    }
-                }
-              }
-              $result->close();
-            };
-
             $found=false;
             $sql='SELECT id,isblocked FROM '.$tabUser.' WHERE email="'.$db->real_escape_string($login).'" and password=unhex(sha2("'.$db->real_escape_string($password).'",256)) limit 1';
             if($result=$db->query($sql)){
@@ -64,7 +45,6 @@ class Login {
                   $session=AppData::getItem('session');
                   $sessionid=$session->create($row['id']);
                   AppData::setOutput(self::DEF_ROLES_OUT_ACTION,'roles',$session->getRoles());
-                  AppData::setSessionKey($sessionid);
                 }
               }
               $result->close();
@@ -80,6 +60,8 @@ class Login {
           $session=AppData::getItem('session');
           AppData::setOutput($actionout,'roles',$session->getRoles());
         break;
+
+/*This is for tests, do not forget to remove it!*/
         case 'testcreate':
         case 'testdestroy':
 
@@ -94,7 +76,7 @@ class Login {
                 "password"=>"1",
                 "roles"=>array(
                   array(
-                    "role"=>UserSession::SYS_ADMIN,
+                    "role"=>AppData::SYS_ADMIN,
                     "account_id"=>0,
                     "caffe_id"=>0
                   )
@@ -105,7 +87,7 @@ class Login {
                 "password"=>"2",
                 "roles"=>array(
                   array(
-                    "role"=>UserSession::ACCOUNT_ADMIN,
+                    "role"=>AppData::ACCOUNT_ADMIN,
                     "account_id"=>1,
                     "caffe_id"=>0
                   )
@@ -116,7 +98,7 @@ class Login {
                 "password"=>"3",
                 "roles"=>array(
                   array(
-                    "role"=>UserSession::CAFFE_ADMIN,
+                    "role"=>AppData::CAFFE_ADMIN,
                     "account_id"=>1,
                     "caffe_id"=>1
                   )
@@ -143,9 +125,6 @@ class Login {
           exit();
         break;
         default:
-          //AppData::addOutput("debug","waiting for solution");
-          //show login form
-          //AppData::setOutput("LOGIN_SET_DATA","data",array('mode'=>'Form','message'=>''));
           AppData::setOutput("SET_APP_MODULE","cls","Login");
       }
 

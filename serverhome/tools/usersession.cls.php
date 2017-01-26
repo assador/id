@@ -2,10 +2,6 @@
 
 class UserSession {
 
-  const SYS_ADMIN='system';
-  const ACCOUNT_ADMIN='account';
-  const CAFFE_ADMIN='caffe';
-
   private $data=array('islogged'=>false,'roles'=>array());
 
   public function check($key){
@@ -68,11 +64,20 @@ class UserSession {
   }
 
 
-  public function checkRole($role){
+  public function checkRole($role,$account=0,$caffe=0){
     if($this->data['islogged'])
       foreach($this->data['roles'] as $data)
-        if($data['role']==$role)
-          return true;
+        if($data['role']==$role){
+            if(empty($data['account'])){
+              return true;
+            } else if($data['account']==$account){
+              if(empty($data['caffe'])){
+                return true;
+              } else if($data['caffe']==$caffe){
+                return true;
+              }
+            }
+        }
     return false;
   }
 
