@@ -3,7 +3,6 @@ class Home {
 
 //list of App modules, JSModule=>PHPModule that can form the list
     private $appModules=array(
-      'Home'=>'Home',
       'Test'=>'Test'
     );
 
@@ -13,7 +12,7 @@ class Home {
       $action=empty($in['action'])?'':$in['action'];
       switch ($action){
         case 'modules':
-          AppData::setOutput('HOME_MODULES_LIST','modules',$this->buildModulesList());
+          AppData::setOutput('HOME_MODULES_LIST','modulesAvailableList',$this->buildModulesList());
         break;
         case 'runathome':
           AppData::setOutput("SET_HOME_MODULE","cls","Home");

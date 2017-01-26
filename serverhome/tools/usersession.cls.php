@@ -63,21 +63,49 @@ class UserSession {
     }
   }
 
-
-  public function checkRole($role,$account=0,$caffe=0){
+  public function checkRole($role){
     if($this->data['islogged'])
       foreach($this->data['roles'] as $data)
-        if($data['role']==$role){
-            if(empty($data['account'])){
+        if($data['role']==$role)
               return true;
-            } else if($data['account']==$account){
-              if(empty($data['caffe'])){
+    return false;
+  }
+
+  public function checkAccessToItem($type,$id=0){
+    //if user has SYS_ADMIN role - he has access to any object granted
+    foreach($this->data['roles'] as $data)
+      if($data['role']==AppData::SYS_ADMIN)
+        return true;
+
+    switch($type){
+      case AppData::ACCOUNT_ADMIN:
+        $tabAccont=dbTableName('account');
+        if($result=dbQuery($db,'select id from '.$tabAccount.' where id='.intval($id).' limit 1')){
+          while($row=$resultRole->fetch_assoc()){
+            $account_id=$row['id'];
+            foreach($this->data['roles'] as $data)
+              if(($data['role']==AppData::ACCOUNT_ADMIN && $data['account_id']==$account_id))
                 return true;
-              } else if($data['caffe']==$caffe){
-                return true;
-              }
-            }
+          }
+          $result->close();
         }
+      break;
+      case AppData::CAFFE_ADMIN:
+        $db=AppData::getItem('sysdb');
+        $tabCaffe=dbTableName('caffe');
+        if($result=dbQuery($db,'select id,account_id from '.$tabCaffe.' where id='.intval($id).' limit 1')){
+          while($row=$resultRole->fetch_assoc()){
+            $account_id=$row['account_id'];
+            $caffe_id=$row['id'];
+            foreach($this->data['roles'] as $data)
+              if(($data['role']==AppData::ACCOUNT_ADMIN && $data['account_id']==$account_id)
+                || ($data['role']==AppData::CAFFE_ADMIN && $data['caffe_id']==$caffe_id))
+                return true;
+          }
+          $result->close();
+        }
+      break;
+    }
     return false;
   }
 
