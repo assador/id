@@ -1,13 +1,14 @@
 <?php
 
 class AppData {
+
+  const SYS_ADMIN='system';
+  const ACCOUNT_ADMIN='account';
+  const CAFFE_ADMIN='caffe';
+
   private static $data=array();
   private static $output=array();
   private static $session="";
-
-  public static function setSessionKey($sessionkey){
-    self::$session=$sessionkey;
-  }
 
   public static function setItem($key,$value){
     self::$data[$key]=$value;
@@ -42,8 +43,13 @@ class AppData {
   }
   public static function postOutput(){
     header("Content-type: application/json; charset=".CODEPAGE."\n");
-    self::$output['session']=self::$session;
+    $sesid='';
+    $session=self::getItem('session');
+    if($session && $session->isLogged()) $sesid=$session->getSessionKey();
+    
+    self::$output['session']=$sesid;
     echo json_encode(self::$output);
   }
+
 }
 ?>

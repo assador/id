@@ -1,22 +1,18 @@
-import {ReduceStore} from "flux/utils";
-import AppDispatcher from "./Dispatcher.jsx";
+import invariant from "invariant";
 
-/*
-Это вроде бы полезная штука
-Здесь мы создаем и храним Storages
-удобство в том, что мы их можем убивать, отключать, включать и создавать
-Что хорошо
-*/
-class StoresPool {
+class FluxStoresPool {
     constructor(){
       this._stores={};
     }
     create(id,storeCls){
         var o=this._stores[id];
         if(o) return o.store;
+        let s=new storeCls();
+        if(!s.getDispatcher || !s.getDispatchToken)
+          invariant(false,"Store creation error: store class should has getDispatcher and getDispatchToken methods");
         this._stores[id]={
           registered:true,
-          store:new storeCls()
+          store:s
         };
     }
     remove(id){
@@ -30,14 +26,14 @@ class StoresPool {
     }
     off(id){
       var o=this._stores[id];
-      if(o && o.registered){
-          AppDispatcher.unregister(o.store.getDispatchToken());
+      if(o && o.dospatcher){
+          o.store.getDispatcher().unregister(o.store.getDispatchToken());
       }
     }
     on(id){
       var o=this._stores[id];
       if(o && !o.registered){
-          AppDispatcher.register(o.store);
+          o.store.getDispatcher().register(o.store);
       }
     }
     item(id){
@@ -54,4 +50,4 @@ class StoresPool {
     }
 }
 
-export default new StoresPool();
+export default new FluxStoresPool();

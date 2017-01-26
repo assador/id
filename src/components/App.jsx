@@ -6,10 +6,12 @@ import Home from "./home/Home.jsx";
 import StoresPool from '../StoresPool.jsx';
 
 /* Это компонент рута */
-/*А так мы создаем ему Store, который не собираемся убивать*/
-StoresPool.create('App',AppStore);
-
 class App extends React.Component {
+	constructor(props){
+		super(props);
+		/*А так мы создаем ему Store, который не собираемся убивать*/
+		StoresPool.create('App',AppStore);
+	}
 	/**
 	 * Эти две функции — чёрная магия. Они обязательны, когда компонент является
 	 * Container — т.e., берет своё state у Store. В данном случае — мы говорим,
