@@ -9,23 +9,26 @@ class HomeStore extends ReduceStore {
 	}
 	getInitialState() {
 		return Immutable.Map({
-			components: {},
-			componentLastId: -1,
-			componentActiveId: -1,
+			modulesInstances: {},
+			modulesInstancesNum: -1,
+			modulesInstancesLastNum: -1,
 			// Статичная заглушка: список модулей для конкретных ролей.
-			modules : [
+			modulesAvailableList : [
 				{
-					type: "TestModule1",
+					name: "Тестовый модуль №1",
+					// Путь к модулю от /src. Другой корень можно задать в HomeActions.
+					path: "test/TestModule1.jsx",
 					// Свойства по умолчанию для инициализируемого модуля.
-					props: {
-						prop_1_1: "Параметр 1 для Модуля 1",
-						prop_1_2: "Параметр 2 для Модуля 1",
+					params: {
+						param_1_1: "Параметр 1 для Модуля 1",
+						param_1_2: "Параметр 2 для Модуля 1",
 					},
 				},
 				{
-					type: "TestModule2",
-					props: {
-						prop_2_1: "Параметр 1 для Модуля 2",
+					name: "Тестовый модуль №2",
+					path: "test/TestModule2.jsx",
+					params: {
+						param_2_1: "Параметр 1 для Модуля 2",
 					},
 				},
 			],
@@ -34,20 +37,28 @@ class HomeStore extends ReduceStore {
 	reduce(state, action) {
 		switch(action.type) {
 			case HomeActionTypes.ADD_HOME_MODULE :
-				state = state.update("componentLastId", n => n + 1);
-				state = state.update("componentActiveId", n => n + 1);
-				state = state.update("components", components => {
-					components[state.get("componentLastId")] = React.createElement(
-						action.module.type,
-						action.module.props,
+				const newNum = state.get("modulesInstancesLastNum") + 1;
+				state = state.set("modulesInstancesLastNum", newNum);
+				state = state.set("modulesInstancesNum", newNum);
+				action.moduleParams.key = action.moduleParams.num = newNum;
+				action.moduleParams.name = action.moduleName;
+				state = state.update("modulesInstances", i => {
+					i[state.get("modulesInstancesLastNum")] = React.createElement(
+						// Если у модуля есть default, то default. Если нет, то первый.
+						action.moduleComponents.default
+							? action.moduleComponents.default
+							: action.moduleComponents[Object.keys(action.moduleComponents)[0]]
+						, action.moduleParams
 					);
-					return components;
+					return i;
 				});
 				return state;
+			case HomeActionTypes.SET_HOME_MODULE :
+				return state.set("modulesInstancesNum", action.num);
 			default :
 				return state;
 		}
 	}
 }
 
-export default new HomeStore();
+export default HomeStore;

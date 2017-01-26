@@ -3,16 +3,22 @@ import AppDispatcher from "../Dispatcher.jsx";
 import ServerApi from "../ServerApi.jsx";
 
 const HomeActions = {
-	addHomeModule(module, evt) {
-		AppDispatcher.dispatch({
-			type: HomeActionTypes.ADD_HOME_MODULE,
-			module: module,
+	addHomeModule(moduleAvialable, evt) {
+		System.import("../components/" + moduleAvialable.path).then(m => {
+			AppDispatcher.dispatch({
+				type: HomeActionTypes.ADD_HOME_MODULE,
+				moduleComponents: m,
+				moduleName: moduleAvialable.name,
+				moduleParams: moduleAvialable.params,
+			});
+		}).catch(err => {
+			console.log(err);
 		});
 	},
-	setHomeModule(id, evt) {
+	setHomeModule(num, evt) {
 		AppDispatcher.dispatch({
 			type: HomeActionTypes.SET_HOME_MODULE,
-			id: id,
+			num: num,
 		});
 	},
 };
