@@ -8,15 +8,18 @@ import DevProps from "../service/DevProps.jsx";
 class TestModule2 extends React.Component {
 	constructor(props) {
 		super(props);
-		StoresPool.create("TestModule2", TestModule2Store);
+		StoresPool.create("TestModule2"+props.caffe_id, TestModule2Store);
 	}
-	static getStores() {
-		return StoresPool.arr("TestModule2");
+	static getStores(props) {
+		return StoresPool.arr("TestModule2"+props.caffe_id);
 	}
-	static calculateState(prevState) {
+	static calculateState(prevState,props) {
 		return {
-			TestModule2Store: StoresPool.item("TestModule2").getState(),
+			TestModule2Store: StoresPool.item("TestModule2"+props.caffe_id).getState(),
 		}
+	}
+	componentWillUnmount(){
+		StoresPool.remove("TestModule2"+this.props.caffe_id);
 	}
 	render() {
 		const n = "state1", v = 2;
@@ -35,4 +38,4 @@ class TestModule2 extends React.Component {
 	}
 }
 
-export default Container.create(TestModule2);
+export default Container.create(TestModule2, {withProps: true});

@@ -23,10 +23,19 @@ class Test {
             )
         );
         $ret[]=array(
-            'name'=>'Тестовый модуль 2 (для SYS_ADMIN)',
+            'name'=>'Тестовый модуль 2 (для SYS_ADMIN) - кафе 1',
             'path'=>'test/TestModule2.jsx',
             'params'=>array(
-              'param_2_1'=>'Параметр 1 для Модуля 2'
+              'param_2_1'=>'Параметр 1 для Модуля 2',
+              "caffe_id"=>"1"
+            )
+        );
+        $ret[]=array(
+            'name'=>'Тестовый модуль 2 (для SYS_ADMIN) - кафе 2',
+            'path'=>'test/TestModule2.jsx',
+            'params'=>array(
+              'param_2_1'=>'Параметр 1 для Модуля 2',
+              "caffe_id"=>"2"
             )
         );
       } else if($session->checkRole(AppData::ACCOUNT_ADMIN)){
