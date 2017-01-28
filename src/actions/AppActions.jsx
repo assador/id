@@ -1,6 +1,7 @@
 import AppActionTypes from "../constants/AppActionTypes.jsx";
 import AppDispatcher from "../Dispatcher.jsx";
 import ServerApi from "../ServerApi.jsx";
+import StoresPool from "../StoresPool.jsx";
 
 const AppActions = {
 	/**
@@ -21,6 +22,7 @@ const AppActions = {
 	logOut() {
 		ServerApi.ask("login", {action: "out"});
 		AppActions.setModule("Loading");
+		StoresPool.remove("Home");
 	}
 };
 

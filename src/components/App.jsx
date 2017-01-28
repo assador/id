@@ -1,9 +1,9 @@
 import {Container} from "flux/utils";
+import StoresPool from "../StoresPool.jsx";
 import AppStore from "../stores/AppStore.jsx";
 import AppActions from "../actions/AppActions.jsx";
 import Login from "./login/Login.jsx";
 import Home from "./home/Home.jsx";
-import StoresPool from "../StoresPool.jsx";
 
 /* Это компонент рута */
 
@@ -39,15 +39,15 @@ class App extends React.Component {
 		const cls = this.state.appStore.get("cls");
 		switch(cls) {
 			case "Loading" :
-				return <div>Loading…</div>
+				return <div>Загрузка…</div>
 			case "" :
-				return <div>Not inited yet.</div>
+				return <div>Пока недоступно.</div>
 			case "Login" :
 				return <Login />
 			case "Home" :
 				return <Home user={this.state.appStore.get("roles")} />
 			default :
-				return <div>Panic, there is no {cls} cather.</div>
+				return <div>Неожиданное значение cls — “{cls}” — в хранилище App.</div>
 		}
 	}
 }

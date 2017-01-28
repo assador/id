@@ -1,7 +1,7 @@
 import Immutable from "immutable";
 import {ReduceStore} from "flux/utils";
-import HomeActionTypes from "../constants/HomeActionTypes.jsx";
 import AppDispatcher from "../Dispatcher.jsx";
+import HomeActionTypes from "../constants/HomeActionTypes.jsx";
 
 class HomeStore extends ReduceStore {
 	constructor() {
@@ -12,30 +12,13 @@ class HomeStore extends ReduceStore {
 			modulesInstances: {},
 			modulesInstancesNum: -1,
 			modulesInstancesLastNum: -1,
-			// Статичная заглушка: список модулей для конкретных ролей.
-			modulesAvailableList : [
-				{
-					name: "Тестовый модуль №1",
-					// Путь к модулю от /src. Другой корень можно задать в HomeActions.
-					path: "test/TestModule1.jsx",
-					// Свойства по умолчанию для инициализируемого модуля.
-					params: {
-						param_1_1: "Параметр 1 для Модуля 1",
-						param_1_2: "Параметр 2 для Модуля 1",
-					},
-				},
-				{
-					name: "Тестовый модуль №2",
-					path: "test/TestModule2.jsx",
-					params: {
-						param_2_1: "Параметр 1 для Модуля 2",
-					},
-				},
-			],
+			modulesAvailableList : null,
 		});
 	}
 	reduce(state, action) {
 		switch(action.type) {
+			case HomeActionTypes.HOME_MODULES_LIST :
+				return state.set("modulesAvailableList", action.modulesAvailableList);
 			case HomeActionTypes.ADD_HOME_MODULE :
 				const newNum = state.get("modulesInstancesLastNum") + 1;
 				state = state.set("modulesInstancesLastNum", newNum);

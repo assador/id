@@ -10,7 +10,7 @@ class LoginWait extends React.Component {
 				<div className="row">
 					<div className="col-lg-6 col-lg-offset-3">
 						<h1>Вход</h1>
-						<h3>Подождите…</h3>
+						<p>Подождите…</p>
 					</div>
 				</div>
 			</div>

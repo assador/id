@@ -3,6 +3,9 @@ import AppDispatcher from "../Dispatcher.jsx";
 import ServerApi from "../ServerApi.jsx";
 
 const HomeActions = {
+	loadHomeModules(cls, data) {
+		ServerApi.ask(cls, data);
+	},
 	addHomeModule(moduleAvialable, evt) {
 		System.import("../components/" + moduleAvialable.path).then(m => {
 			AppDispatcher.dispatch({

@@ -1,14 +1,14 @@
 import Immutable from "immutable";
 import {ReduceStore} from "flux/utils";
-import AppActionTypes from "../constants/AppActionTypes.jsx";
 import AppDispatcher from "../Dispatcher.jsx";
+import AppActionTypes from "../constants/AppActionTypes.jsx";
 
 class AppStore extends ReduceStore {
 	constructor() {
 		super(AppDispatcher);
 	}
 	getInitialState() {
-		return Immutable.Map({cls: "",roles:[]});
+		return Immutable.Map({cls: "", roles: []});
 	}
 	reduce(state, action) {
 		switch(action.type) {
