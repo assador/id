@@ -8,7 +8,7 @@ import DevProps from "../service/DevProps.jsx";
 class TestModule2 extends React.Component {
 	constructor(props) {
 		super(props);
-		StoresPool.create("TestModule2"+props.caffe_id, TestModule2Store);
+		StoresPool.create("TestModule2"+props.caffe_id, TestModule2Store,props.caffe_id,"mytest");
 	}
 	static getStores(props) {
 		return StoresPool.arr("TestModule2"+props.caffe_id);

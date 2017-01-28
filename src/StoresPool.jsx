@@ -4,10 +4,10 @@ class FluxStoresPool {
     constructor(){
       this._stores={};
     }
-    create(id,storeCls){
+    create(id,storeCls,...params){
         var o=this._stores[id];
         if(o) return o.store;
-        let s=new storeCls();
+        let s=new storeCls(...params);
         if(!s.getDispatcher || !s.getDispatchToken)
           invariant(false,"Store creation error: store class should has getDispatcher and getDispatchToken methods");
         this._stores[id]={

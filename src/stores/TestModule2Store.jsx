@@ -4,8 +4,11 @@ import TestModule2ActionTypes from "../constants/TestModule2ActionTypes.jsx";
 import AppDispatcher from "../Dispatcher.jsx";
 
 class TestModule2Store extends ReduceStore {
-	constructor() {
+	constructor(caffe_id,desc) {
 		super(AppDispatcher);
+		console.log(caffe_id);
+		console.log(desc);
+		this.caffe_id=caffe_id;
 	}
 	getInitialState() {
 		return Immutable.Map({
