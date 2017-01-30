@@ -18,7 +18,7 @@ class ServerApi {
  * import ServerApi from "./ServerApi.jsx";
  * ...
  * ServerApi.ajax("cls для сервера", {объект с параметрами для отправки})
-*/
+ */
 	ask(cls, params) {
 		if(!params) params = {};
 		params.cls = cls;
@@ -49,7 +49,7 @@ class ServerApi {
  *     item,
  * });
  * И все (все!) зарегистрированные Store их получают. И на нужные — реагируют.
-*/
+ */
 	onReceiveData(data) {
 		//console.log("DATA RECEIVED!");
 		//console.log(data);

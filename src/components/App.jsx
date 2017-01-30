@@ -17,7 +17,7 @@ class App extends React.Component {
 	 * Эти две функции — чёрная магия. Они обязательны, когда компонент является
 	 * Container — т.e., берет своё state у Store. В данном случае — мы говорим,
 	 * что использует AppStore и что наше state — забирается из AppState.getState()
-	*/
+	 */
 	static getStores() {
 		return StoresPool.arr("App");
 	}
@@ -31,7 +31,7 @@ class App extends React.Component {
 	 * на cls = home. Это проверка прав. Если у юзера валидная session — сервер
 	 * определит права, подключит нужный вариант home и скажет, что рисовать.
 	 * Если session не валидна — сервер выдаст команду рисовать Login.
-	*/
+	 */
 	componentDidMount() {
 		AppActions.loadModule("home");
 	}

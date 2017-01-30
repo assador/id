@@ -7,7 +7,7 @@ const AppActions = {
 	/**
 	 * cls — is an ID of requested module
 	 * data — is an Object with params to send {'param1': 'val1', 'param2': 'val2'...}
-	*/
+	 */
 	loadModule(cls, data) {
 		ServerApi.ask(cls, data);
 		AppActions.setModule("Loading");

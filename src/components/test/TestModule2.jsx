@@ -8,28 +8,25 @@ import DevProps from "../service/DevProps.jsx";
 class TestModule2 extends React.Component {
 	constructor(props) {
 		super(props);
-		StoresPool.create("TestModule2"+props.caffe_id, TestModule2Store,props.caffe_id,"mytest");
+		StoresPool.create("TestModule2_" + props.num, TestModule2Store, props.num, "mytest");
 	}
 	static getStores(props) {
-		return StoresPool.arr("TestModule2"+props.caffe_id);
+		return StoresPool.arr("TestModule2_" + props.num);
 	}
 	static calculateState(prevState,props) {
 		return {
-			TestModule2Store: StoresPool.item("TestModule2"+props.caffe_id).getState(),
+			TestModule2Store: StoresPool.item("TestModule2_" + props.num).getState(),
 		}
-	}
-	componentWillUnmount(){
-		StoresPool.remove("TestModule2"+this.props.caffe_id);
 	}
 	render() {
 		const n = "state1", v = 2;
 		return (
 			<div>
 				<button
-					onClick={evt => TestModule2Actions.setTestState(n, v, evt)}
+					onClick={evt => TestModule2Actions.setTestState(this.props.num, n, v, evt)}
 				>Увеличить тестовое состояние “{n}” на {v}</button>
 				<h3>TestModule2[{this.props.num}].state:</h3>
-				<DevProps data={this.state.TestModule2Store._root.entries} />
+				<DevProps data={this.state.TestModule2Store._root.entries} store />
 				<h3>TestModule2[{this.props.num}].props:</h3>
 				<DevProps data={this.props} />
 				<hr />

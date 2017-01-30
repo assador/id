@@ -4,11 +4,9 @@ import TestModule2ActionTypes from "../constants/TestModule2ActionTypes.jsx";
 import AppDispatcher from "../Dispatcher.jsx";
 
 class TestModule2Store extends ReduceStore {
-	constructor(caffe_id,desc) {
+	constructor(num, optional) {
 		super(AppDispatcher);
-		console.log(caffe_id);
-		console.log(desc);
-		this.caffe_id=caffe_id;
+		this.num = num;
 	}
 	getInitialState() {
 		return Immutable.Map({
@@ -16,6 +14,7 @@ class TestModule2Store extends ReduceStore {
 		});
 	}
 	reduce(state, action) {
+		if(action.num !== this.num) return state;
 		switch(action.type) {
 			case TestModule2ActionTypes.SET_STATE :
 				return state.update(action.name, i => i + action.value);

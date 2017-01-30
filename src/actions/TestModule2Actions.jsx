@@ -3,9 +3,10 @@ import AppDispatcher from "../Dispatcher.jsx";
 import ServerApi from "../ServerApi.jsx";
 
 const TestModule2Actions = {
-	setTestState(name, value, evt) {
+	setTestState(num, name, value, evt) {
 		AppDispatcher.dispatch({
 			type: TestModule2ActionTypes.SET_STATE,
+			num: num,
 			name: name,
 			value: value,
 		});

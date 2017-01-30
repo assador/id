@@ -3,6 +3,14 @@ import {ReduceStore} from "flux/utils";
 import AppDispatcher from "../Dispatcher.jsx";
 import HomeActionTypes from "../constants/HomeActionTypes.jsx";
 
+/**
+ * Основная архитектура — организация инстансов модулей в приложении — здесь.
+ * Хомяк хранит в своём сторе в объекте modulesInstances создаваемые в процессе
+ * работы приложения инстансы модулей, каждый с уникальным числом props.num,
+ * которое одновременно является ключом инстанса в modulesInstances.
+ * Число modulesInstancesNum — номер активного в данных момент времени инстанса.
+ * Массив modulesAvailableList — список доступных текущему пользователю модулей.
+ */
 class HomeStore extends ReduceStore {
 	constructor() {
 		super(AppDispatcher);

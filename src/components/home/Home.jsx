@@ -69,7 +69,10 @@ class Home extends React.Component {
 						>
 							Экземпляр (num: {this.state.homeStore.get("modulesInstances")[key].props.num}) модуля<br />
 							«{this.state.homeStore.get("modulesInstances")[key].props.name}»<br />
-							класса “{this.state.homeStore.get("modulesInstances")[key].type.name}”
+							класса “{
+								this.state.homeStore.get("modulesInstances")[key].type.displayName
+								|| this.state.homeStore.get("modulesInstances")[key].type.name
+							}”
 						</button> </span>
 					)}
 				</div>
