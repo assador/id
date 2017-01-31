@@ -48,38 +48,67 @@ class Home extends React.Component {
 			this.state.homeStore.get("modulesInstances")
 				[this.state.homeStore.get("modulesInstancesNum")];
 		return (
+<div className="app-table">
+	<div className="app-row" id="top">
+		<div className="app-cell" id="top-left">
+		</div>
+		<div className="app-cell app-sbm-top-2" id="top-basic">
+		</div>
+		<div className="app-cell" id="top-right">
+		</div>
+	</div>
+	<div className="app-row" id="basic">
+		<div className="app-cell app-sbm-left-2" id="basic-left">
+		</div>
+		<div className="app-cell" id="basic-basic">
+			<input type="button" value="←" onClick={() => changeSidebarMode("left", "smaller")} />
+			<input type="button" value="→" onClick={() => changeSidebarMode("left", "bigger")} />
+			<br />
+			<input type="button" value="↑" onClick={() => changeSidebarMode("top", "smaller")} />
+			<input type="button" value="↓" onClick={() => changeSidebarMode("top", "bigger")} />
+			<h1>Home залогинившегося</h1>
+			<button className="btn btn-default" onClick={AppActions.logOut}>Отлогиниться</button>
+			<h2>Home.props (отладка)</h2>
+			<DevProps data={this.props} />
+			<hr />
+			<h3>Доступные модули</h3>
+			<p>(клик по кнопке модуля добавляет его экземпляр в Home и переключает на него)</p>
+			<div>{modulesAvailable}</div>
+			<hr />
+			<h3>Экземпляры модулей</h3>
+			<p>(клик по кнопке экземпляра модуля переключает на него)</p>
 			<div>
-				<h1>Home залогинившегося</h1>
-				<button className="btn btn-default" onClick={AppActions.logOut}>Отлогиниться</button>
-				<h2>Home.props (отладка)</h2>
-				<DevProps data={this.props} />
-				<hr />
-				<h3>Доступные модули</h3>
-				<p>(клик по кнопке модуля добавляет его экземпляр в Home и переключает на него)</p>
-				<div>{modulesAvailable}</div>
-				<hr />
-				<h3>Экземпляры модулей</h3>
-				<p>(клик по кнопке экземпляра модуля переключает на него)</p>
-				<div>
-					{Object.keys(this.state.homeStore.get("modulesInstances")).map(key =>
-						<span key={key}><button
-							onClick={evt => HomeActions.setHomeModule(key, evt)}
-							disabled={key === String(this.state.homeStore.get("modulesInstancesNum")) ? true : false}
-							className="btn btn-default"
-						>
-							Экземпляр (num: {this.state.homeStore.get("modulesInstances")[key].props.num}) модуля<br />
-							«{this.state.homeStore.get("modulesInstances")[key].props.name}»<br />
-							класса “{
-								this.state.homeStore.get("modulesInstances")[key].type.displayName
-								|| this.state.homeStore.get("modulesInstances")[key].type.name
-							}”
-						</button> </span>
-					)}
-				</div>
-				<hr />
-				<h2>Экземпляр модуля</h2>
-				{modulesActiveInstance}
+				{Object.keys(this.state.homeStore.get("modulesInstances")).map(key =>
+					<span key={key}><button
+						onClick={evt => HomeActions.setHomeModule(key, evt)}
+						disabled={key === String(this.state.homeStore.get("modulesInstancesNum")) ? true : false}
+						className="btn btn-default"
+					>
+						Экземпляр (num: {this.state.homeStore.get("modulesInstances")[key].props.num}) модуля<br />
+						«{this.state.homeStore.get("modulesInstances")[key].props.name}»<br />
+						класса “{
+							this.state.homeStore.get("modulesInstances")[key].type.displayName
+							|| this.state.homeStore.get("modulesInstances")[key].type.name
+						}”
+					</button> </span>
+				)}
 			</div>
+			<hr />
+			<h2>Экземпляр модуля</h2>
+			{modulesActiveInstance}
+		</div>
+		<div className="app-cell app-sbm-right-1" id="basic-right">
+		</div>
+	</div>
+	<div className="app-row" id="bottom">
+		<div className="app-cell" id="bottom-left">
+		</div>
+		<div className="app-cell app-sbm-bottom-1" id="bottom-basic">
+		</div>
+		<div className="app-cell" id="bottom-right">
+		</div>
+	</div>
+</div>
 		);
 	}
 }

@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>eWaiter</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+	<link rel="shortcut icon" type="image/x-icon" href="/images/favicon.ico" />
+	<link rel="stylesheet" href="/vendor/jquery-ui/1.12.1/jquery-ui.css" />
+	<link rel="stylesheet" href="/vendor/bootstrap/3.3.7/css/bootstrap.min.css" />
+	<link rel="stylesheet" href="/vendor/bootstrap/3.3.7/css/bootstrap-theme.min.css" />
+	<link rel="stylesheet" href="/css/style.css" />
+	<link rel="stylesheet" href="/css/layout.css" />
+	<script src="/scripts/decor.js" type="text/javascript"></script>
+	<script src="/vendor/jquery/3.1.1/jquery.min.js"></script>
+	<script src="/vendor/jquery-ui/1.12.1/jquery-ui.min.js"></script>
+	<script src="/vendor/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	<script src="/node_modules/react/dist/react.js"></script>
+	<script src="/node_modules/react-dom/dist/react-dom.js"></script>
+<!--
+	<script src="https://unpkg.com/react@15/dist/react.min.js"></script>
+	<script src="https://unpkg.com/react-dom@15/dist/react-dom.min.js"></script>
+-->
+</head>
+<body>
+	<div class="app-table" id="ewaiter-app">
+		<div class="app-row" id="top">
+			<div class="app-cell" id="top-left">
+			</div>
+			<div class="app-cell app-sbm-top-2" id="top-basic">
+				<h1>eWaiter</h1>
+				<a href="javascript:void(0);" onclick="changeSidebarMode('top', 'smaller');" class="app-sba-up"></a>
+				<a href="javascript:void(0);" onclick="changeSidebarMode('top', 'bigger', 3);" class="app-sba-down"></a>
+			</div>
+			<div class="app-cell" id="top-right">
+			</div>
+		</div>
+		<div class="app-row" id="basic">
+			<div class="app-cell app-sbm-left-2" id="basic-left">
+				<a href="javascript:void(0);" onclick="changeSidebarMode('left', 'smaller');" class="app-sba-left"></a>
+				<a href="javascript:void(0);" onclick="changeSidebarMode('left', 'bigger');" class="app-sba-right"></a>
+			</div>
+			<div class="app-cell" id="basic-basic">
+				<div class="block_00">
+					<div class="object_text">
+						<p>Этот текст является примером некоторого информационного наполнения, <span class="pseudo_button">созданного с неопределённой</span> <span class="pseudo_button" style="width: 80px;">на момент написания этого текста</span> <span class="pseudo_button">целью</span>. Неопределённость этой цели, однако, не говорит о том, что этой цели не появится в будущем, как не говорит и о том, что составитель этого текста безумен, либо лишён своих собственных целей и задач в условиях глобальных проблем занятости в современном мире.</p>
+						<hr />
+						<p>Напротив, сиюминутная неопределённость цели этой информации предполагает возможную в будущем потребность в некоторой бессмысленной, максимально абстрагированной информации. Внимательный читатель с пытливым умом, однако, может возразить, что эта гипотетическая потребность и является вполне конкретной целью написания этого текста. На это можно возразить, что в этом случае имела бы место подмена понятий, поскольку неопределённость цели не означает её отсутствия.</p>
+						<div class="block_02 sorting_element">
+							<h2>Заголовок второго уровня</h2>
+							<p>Итак, специфика данного текста предполагает его минимальную осмысленность, что продиктовано его целями и задачами, на данный момент неопределёнными, но безусловно существующими. Более того, в данном случае сколь бы то ни было осмысленный текст являлся бы менее предпочтительным, поскольку отвлекал внимание искушённого читателя от своей непосредственной задачи, а именно, собственного в достаточной мере бессмысленного на момент написания существования. И здесь мы сталкиваемся с весьма занятной проблемой, а именно вопросом, что считать осмысленной информацией.</p>
+						</div>
+						<div class="block_02 sorting_element">
+							<h3>Заголовок третьего уровня</h3>
+							<p>Если определить смысл информации как некоторое знание, которое передаётся посредством её, то эта информация достаточно бессмысленна, поскольку никакого знания, кроме, разве что, представления об авторе, не передаёт.</p>
+							<div class="block_02">
+								<p>С другой стороны, смысл <a href="/">информации</a> можно определить как некоторый, пусть и бесполезный, но связный и законченный посыл, а он-то как раз в этом тексте существует и заключается в рассуждениях и выводах о себе самом, то есть, целях и задачах этой информации.</p>
+							</div>
+							<p>Таким образом, вопрос о достаточности осмысленности этого текста осложняется не только неопределённостью, собственно, достаточности, но также, в данном случае, и неопределённостью осмысленности как таковой.</p>
+						</div>
+						<ul>
+							<li>Пункт ненумерованного списка</li>
+							<li>Еще один пункт списка
+								<ul>
+									<li>Подпункт ненумерованного списка</li>
+									<li>Еще один подпункт списка</li>
+									<li>Последний подпункт ненумерованного списка</li>
+								</ul>
+							</li>
+							<li>Последний пункт ненумерованного списка</li>
+						</ul>
+						<ol>
+							<li>Пункт нумерованного списка</li>
+							<li>Еще один пункт списка
+								<ol>
+									<li>Подпункт нумерованного списка</li>
+									<li>Еще один подпункт списка</li>
+									<li>Последний подпункт нумерованного списка</li>
+								</ol>
+							</li>
+							<li>Последний пункт нумерованного списка</li>
+						</ol>
+						<p><a id="tempa" href="/" onmouseover="/*popup_show_hide(document.getElementById('tempdiv'), event);*/">Пример обычного текста для демонстрации элементов оформления.</a></p>
+						<p id="tempdiv" class="popupdiv">Этот текст является примером некоторого информационного наполнения, созданного с неопределённой на момент написания этого текста целью. Неопределённость этой цели, однако, не говорит о том, что этой цели не появится в будущем, как не говорит и о том, что составитель этого текста безумен, либо лишён своих собственных целей и задач в условиях глобальных проблем занятости в современном мире. Напротив, сиюминутная неопределённость цели этой информации предполагает возможную в будущем потребность в некоторой бессмысленной, максимально абстрагированной информации. Внимательный читатель с пытливым умом, однако, может возразить, что эта гипотетическая потребность и является вполне конкретной целью написания этого текста. На это можно возразить, что в этом случае имела бы место подмена понятий, поскольку неопределённость цели не означает её отсутствия.</p>
+						<form method="post" action="post" class="fieldswidth_100">
+							<fieldset>
+								<table class="table_form">
+									<tr><th>button</th><td><input type="button" value="input button" /></td></tr>
+									<tr><th>checkbox</th><td><label><input type="checkbox" /> checkbox</label></td></tr>
+									<tr><th>color</th><td><input type="color" /></td></tr>
+									<tr><th>date</th><td><input type="date" /></td></tr>
+									<tr><th>datetime</th><td><input type="datetime" /></td></tr>
+									<tr><th>datetime-local</th><td><input type="datetime-local" /></td></tr>
+									<tr><th>email</th><td><input type="email" /></td></tr>
+									<tr><th>file</th><td><input type="file" /></td></tr>
+									<tr><th>hidden</th><td><input type="hidden" /></td></tr>
+									<tr><th>image</th><td><input type="image" src="/images/imp.png" /></td></tr>
+									<tr><th>month</th><td><input type="month" /></td></tr>
+									<tr><th>number</th><td><input type="number" /></td></tr>
+									<tr><th>password</th><td><input type="password" /></td></tr>
+									<tr><th>radio</th><td><label><input type="radio" /> radio</label></td></tr>
+									<tr><th>range</th><td><input type="range" /></td></tr>
+									<tr><th>reset</th><td><input type="reset" /></td></tr>
+									<tr><th>search</th><td><input type="search" /></td></tr>
+									<tr><th>submit</th><td><input type="submit" /></td></tr>
+									<tr><th>tel</th><td><input type="tel" /></td></tr>
+									<tr><th>text</th><td><input type="text" /></td></tr>
+									<tr><th>time</th><td><input type="time" /></td></tr>
+									<tr><th>url</th><td><input type="url" /></td></tr>
+									<tr><th>week</th><td><input type="week" /></td></tr>
+									<tr><th>button</th><td><button>button</button></td></tr>
+									<tr><th>select</th><td><select><option>Пункт списка</option><option>Некоторый пункт</option></select></td></tr>
+									<tr><th>textarea</th><td><textarea rows="10" cols="50"></textarea></td></tr>
+								</table>
+								<p>
+									<input type="button" value="input button" style="width: 100px;" />
+									<label><input type="checkbox" /> checkbox</label>
+									<input type="color" style="width: 100px;" />
+									<input type="date" style="width: 100px;" />
+									<input type="datetime" style="width: 100px;" />
+									<input type="datetime-local" style="width: 100px;" />
+									<input type="email" placeholder="email" style="width: 100px;" />
+									<input type="file" style="width: 250px;" />
+									<input type="hidden" />
+									<input type="image" src="/images/imp.png" />
+									<input type="month" style="width: 100px;" />
+									<input type="number" placeholder="number" style="width: 100px;" />
+									<input type="password" placeholder="password" style="width: 100px;" />
+									<label><input type="radio" /> radio</label>
+									<input type="range" style="width: 100px;" />
+									<input type="reset" style="width: 100px;" />
+									<input type="search" placeholder="search" style="width: 100px;" />
+									<input type="submit" style="width: 100px;" />
+									<input type="tel" placeholder="tel" style="width: 100px;" />
+									<input type="text" placeholder="text" style="width: 100px;" />
+									<input type="time" style="width: 100px;" />
+									<input type="url" placeholder="url" style="width: 100px;" />
+									<input type="week" style="width: 100px;" />
+									<button style="width: 100px;">button</button>
+									<select style="width: 100px;"><option>Пункт списка</option><option>Некоторый пункт</option></select>
+									<textarea rows="2" cols="50" placeholder="textarea" style="width: 100px;"></textarea>
+								</p>
+							</fieldset>
+						</form>
+						<p>Пример обычного текста для демонстрации элементов оформления.</p>
+						<table>
+							<thead>
+								<tr>
+									<th>Вариант оформления таблицы</th>
+									<th>Пример названия колонки</th>
+									<th>Некоторый заголовок</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr>
+									<td>Пример текста в ячейке таблицы</td>
+									<td>Некоторый текст</td>
+									<td>Третья колонка таблицы</td>
+								</tr>
+								<tr>
+									<td>Некоторый текст</td>
+									<td>Последняя строка таблицы</td>
+									<td>Некоторый текст</td>
+								</tr>
+							</tbody>
+							<tbody>
+								<tr>
+									<td>Пример текста в ячейке таблицы</td>
+									<td>Некоторый текст</td>
+									<td>Третья колонка таблицы</td>
+								</tr>
+								<tr>
+									<td>Некоторый текст</td>
+									<td>Последняя строка таблицы</td>
+									<td>Некоторый текст</td>
+								</tr>
+							</tbody>
+						</table>
+						<p>Пример обычного текста для демонстрации элементов оформления.</p>
+					</div>
+				</div>
+			</div>
+			<div class="app-cell app-sbm-right-1" id="basic-right">
+			</div>
+		</div>
+		<div class="app-row" id="bottom">
+			<div class="app-cell" id="bottom-left">
+			</div>
+			<div class="app-cell app-sbm-bottom-1" id="bottom-basic">
+			</div>
+			<div class="app-cell" id="bottom-right">
+			</div>
+		</div>
+	</div>
+<!--
+	<script src="/build/index.js"></script>
+-->
+</body>
+</html>

@@ -1,0 +1,74 @@
+
+/* Основные стили */
+
+html, body {
+	height: 100%;
+}
+body {
+	position: relative;
+	min-height: 100%;
+}
+#a {
+	position: absolute;
+}
+.app-row, .app-cell {
+	position: relative;
+}
+.app-table {
+	display: table;
+	position: relative;
+	width: 100%; height: 100%;
+	min-width: 994px;
+}
+.app-row {
+	display: table-row;
+}
+.app-cell {
+	display: table-cell;
+	padding: 24px;
+}
+#top {
+	z-index: 30;
+}
+#basic {
+	z-index: 10;
+}
+#bottom {
+	z-index: 20;
+}
+#top-left, #basic-left, #bottom-left {
+	z-index: 30;
+}
+#top-basic, #basic-basic, #bottom-basic {
+	z-index: 10;
+}
+#top-right, #basic-right, #bottom-right {
+	z-index: 20;
+}
+*[class*="app-sbm-"] {
+	opacity: 1;
+	transition: all 0.7s;
+}
+.app-sbm-left-0, .app-sbm-right-0 {
+	width: 0;
+	opacity: 0;
+}
+.app-sbm-left-1, .app-sbm-right-1 {
+	width: 76px;
+}
+.app-sbm-left-2, .app-sbm-right-2 {
+	width: 200px;
+}
+.app-sbm-top-0, .app-sbm-bottom-0 {
+	height: 0;
+	opacity: 0;
+}
+.app-sbm-top-1, .app-sbm-bottom-1 {
+	height: 47px;
+}
+.app-sbm-top-2, .app-sbm-bottom-2 {
+	height: 76px;
+}
+.app-sbm-top-3, .app-sbm-bottom-3 {
+	height: 200px;
+}
