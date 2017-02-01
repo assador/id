@@ -24,6 +24,14 @@ const HomeActions = {
 			num: num,
 		});
 	},
+	changeSidebarMode(sidebar, mode, ceiling) {
+		AppDispatcher.dispatch({
+			type: HomeActionTypes.SET_HOME_SBM,
+			sidebar: sidebar,
+			mode: mode,
+			ceiling: ceiling,
+		});
+	},
 };
 
 export default HomeActions;

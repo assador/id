@@ -2,6 +2,7 @@ const HomeActionTypes = {
 	HOME_MODULES_LIST: "HOME_MODULES_LIST",
 	ADD_HOME_MODULE: "ADD_HOME_MODULE",
 	SET_HOME_MODULE: "SET_HOME_MODULE",
+	SET_HOME_SBM: "SET_HOME_SBM",
 };
 
 export default HomeActionTypes;

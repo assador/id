@@ -1,4 +1,4 @@
-function changeSidebarMode(sidebar, mode, ceiling) {
+function changeSidebarModeDecoration(sidebar, mode, ceiling) {
 	var modeToSet = null;
 	ceiling = ceiling ? ceiling : 2;
 	var sbc = {

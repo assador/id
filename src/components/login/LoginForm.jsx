@@ -35,7 +35,6 @@ class LoginForm extends React.Component {
 							<div className="form-group">
 								<input
 									type="email"
-									className="form-control"
 									onChange={this.handleChange}
 									ref={(input) => this.emailObj = input}
 									placeholder="E-mail"
@@ -45,7 +44,6 @@ class LoginForm extends React.Component {
 							<div className="form-group">
 								<input
 									type="password"
-									className="form-control"
 									onChange={this.handleChange}
 									ref={(input) => this.pasObj = input}
 									placeholder="Пароль"
@@ -54,8 +52,7 @@ class LoginForm extends React.Component {
 							<LoginMessage message={this.state.message} />
 							<div className="form-group">
 								<button
-									type="button"
-									className="btn btn-primary"
+									type="submit"
 									onClick={this.handleSubmit}
 								>Войти</button>
 							</div>

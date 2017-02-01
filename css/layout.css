@@ -26,24 +26,28 @@ body {
 .app-cell {
 	display: table-cell;
 	padding: 24px;
+	vertical-align: baseline;
+	text-align: left;
 }
-#top {
-	z-index: 30;
+#top .app-cell, #bottom .app-cell {
+	vertical-align: middle;
 }
-#basic {
+#top-left, #top-right, #bottom-right, #bottom-left {
+	text-align: center;
+}
+/* Временно */
+#top-left, #top-right, #bottom-right, #bottom-left {
+	line-height: 0;
+	font-size: 18px;
+}
+#bottom, #top-basic, #bottom-basic {
 	z-index: 10;
 }
-#bottom {
+#top, #basic-left, #basic-right {
 	z-index: 20;
 }
-#top-left, #basic-left, #bottom-left {
+#basic, #basic-basic {
 	z-index: 30;
-}
-#top-basic, #basic-basic, #bottom-basic {
-	z-index: 10;
-}
-#top-right, #basic-right, #bottom-right {
-	z-index: 20;
 }
 *[class*="app-sbm-"] {
 	opacity: 1;
@@ -51,6 +55,7 @@ body {
 }
 .app-sbm-left-0, .app-sbm-right-0 {
 	width: 0;
+	padding: 0;
 	opacity: 0;
 }
 .app-sbm-left-1, .app-sbm-right-1 {
@@ -61,6 +66,7 @@ body {
 }
 .app-sbm-top-0, .app-sbm-bottom-0 {
 	height: 0;
+	padding: 0;
 	opacity: 0;
 }
 .app-sbm-top-1, .app-sbm-bottom-1 {

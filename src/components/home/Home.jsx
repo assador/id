@@ -38,7 +38,6 @@ class Home extends React.Component {
 							onClick={evt => HomeActions.addHomeModule(
 								this.state.homeStore.get("modulesAvailableList")[key], evt
 							)}
-							className="btn btn-default"
 						>
 							{this.state.homeStore.get("modulesAvailableList")[key].name}
 						</button> </span>
@@ -52,29 +51,18 @@ class Home extends React.Component {
 	<div className="app-row" id="top">
 		<div className="app-cell" id="top-left">
 		</div>
-		<div className="app-cell app-sbm-top-2" id="top-basic">
+		<div className={"app-cell app-sbm-top-" + this.state.homeStore.get("sidebarMode").top} id="top-basic">
+			<h1>Home залогинившегося</h1>
 		</div>
 		<div className="app-cell" id="top-right">
+			<button onClick={AppActions.logOut} title="Выйти">×</button>
 		</div>
 	</div>
 	<div className="app-row" id="basic">
-		<div className="app-cell app-sbm-left-2" id="basic-left">
-		</div>
-		<div className="app-cell" id="basic-basic">
-			<input type="button" value="←" onClick={() => changeSidebarMode("left", "smaller")} />
-			<input type="button" value="→" onClick={() => changeSidebarMode("left", "bigger")} />
-			<br />
-			<input type="button" value="↑" onClick={() => changeSidebarMode("top", "smaller")} />
-			<input type="button" value="↓" onClick={() => changeSidebarMode("top", "bigger")} />
-			<h1>Home залогинившегося</h1>
-			<button className="btn btn-default" onClick={AppActions.logOut}>Отлогиниться</button>
-			<h2>Home.props (отладка)</h2>
-			<DevProps data={this.props} />
-			<hr />
+		<div className={"app-cell app-sbm-left-" + this.state.homeStore.get("sidebarMode").left} id="basic-left">
 			<h3>Доступные модули</h3>
 			<p>(клик по кнопке модуля добавляет его экземпляр в Home и переключает на него)</p>
 			<div>{modulesAvailable}</div>
-			<hr />
 			<h3>Экземпляры модулей</h3>
 			<p>(клик по кнопке экземпляра модуля переключает на него)</p>
 			<div>
@@ -82,7 +70,6 @@ class Home extends React.Component {
 					<span key={key}><button
 						onClick={evt => HomeActions.setHomeModule(key, evt)}
 						disabled={key === String(this.state.homeStore.get("modulesInstancesNum")) ? true : false}
-						className="btn btn-default"
 					>
 						Экземпляр (num: {this.state.homeStore.get("modulesInstances")[key].props.num}) модуля<br />
 						«{this.state.homeStore.get("modulesInstances")[key].props.name}»<br />
@@ -93,17 +80,29 @@ class Home extends React.Component {
 					</button> </span>
 				)}
 			</div>
+		</div>
+		<div className="app-cell" id="basic-basic">
+			<a href="javascript:void(0);" className="app-sba-up"
+				onClick={() => HomeActions.changeSidebarMode("top", "smaller")}></a>
+			<a href="javascript:void(0);" className="app-sba-down"
+				onClick={() => HomeActions.changeSidebarMode("top", "bigger", 3)}></a>
+			<a href="javascript:void(0);" className="app-sba-left"
+				onClick={() => HomeActions.changeSidebarMode("left", "smaller")}></a>
+			<a href="javascript:void(0);" className="app-sba-right"
+				onClick={() => HomeActions.changeSidebarMode("left", "bigger")}></a>
+			<h2>Home.props (отладка)</h2>
+			<DevProps data={this.props} />
 			<hr />
 			<h2>Экземпляр модуля</h2>
 			{modulesActiveInstance}
 		</div>
-		<div className="app-cell app-sbm-right-1" id="basic-right">
+		<div className={"app-cell app-sbm-right-" + this.state.homeStore.get("sidebarMode").right} id="basic-right">
 		</div>
 	</div>
 	<div className="app-row" id="bottom">
 		<div className="app-cell" id="bottom-left">
 		</div>
-		<div className="app-cell app-sbm-bottom-1" id="bottom-basic">
+		<div className={"app-cell app-sbm-bottom-" + this.state.homeStore.get("sidebarMode").bottom} id="bottom-basic">
 		</div>
 		<div className="app-cell" id="bottom-right">
 		</div>

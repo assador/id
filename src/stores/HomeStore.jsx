@@ -17,6 +17,7 @@ class HomeStore extends ReduceStore {
 	}
 	getInitialState() {
 		return Immutable.Map({
+			sidebarMode: {top: 2, right: 1, bottom: 1, left: 2},
 			modulesInstances: {},
 			modulesInstancesNum: -1,
 			modulesInstancesLastNum: -1,
@@ -46,6 +47,31 @@ class HomeStore extends ReduceStore {
 				return state;
 			case HomeActionTypes.SET_HOME_MODULE :
 				return state.set("modulesInstancesNum", action.num);
+			case HomeActionTypes.SET_HOME_SBM :
+				let modeCurrent = state.get("sidebarMode")[action.sidebar];
+				console.log(modeCurrent);
+				let modeToSet = null;
+				let ceiling = action.ceiling ? action.ceiling : 2;
+				if(action.mode === "bigger") {
+					if(modeCurrent < ceiling) {
+						modeToSet = modeCurrent + 1;
+					} else {
+						modeToSet = ceiling;
+					}
+				} else if(action.mode === "smaller") {
+					if(modeCurrent > 0) {
+						modeToSet = modeCurrent - 1;
+					} else {
+						modeToSet = 0;
+					}
+				}
+				if(modeToSet === null) {modeToSet = action.mode;}
+				state = state.update("sidebarMode", sb => {
+					sb[action.sidebar] = modeToSet;
+					return sb;
+				});
+				return state;
+//				changeSidebarModeDecoration(action.sidebar, modeToSet);
 			default :
 				return state;
 		}
