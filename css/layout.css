@@ -29,10 +29,8 @@ body {
 	vertical-align: baseline;
 	text-align: left;
 }
-#top .app-cell, #bottom .app-cell {
-	vertical-align: middle;
-}
 #top-left, #top-right, #bottom-right, #bottom-left {
+	vertical-align: middle;
 	text-align: center;
 }
 /* Временно */
@@ -53,28 +51,38 @@ body {
 	opacity: 1;
 	transition: all 0.7s;
 }
-.app-sbm-left-0, .app-sbm-right-0 {
-	width: 0;
+.app-sbm-right-0 {
+	width: 1px;
 	padding: 0;
 	opacity: 0;
 }
-.app-sbm-left-1, .app-sbm-right-1 {
+.app-sbm-left-0, .app-sbm-right-1 {
 	width: 76px;
+	padding: 10px;
 }
-.app-sbm-left-2, .app-sbm-right-2 {
+/* Временно */
+.app-sbm-left-0 .col-md-12, .app-sbm-right-1 .col-md-12 {
+	padding: 5px;
+}
+.app-sbm-left-1, .app-sbm-right-2 {
 	width: 200px;
 }
-.app-sbm-top-0, .app-sbm-bottom-0 {
-	height: 0;
+.app-sbm-bottom-0 {
+	height: 1px;
 	padding: 0;
 	opacity: 0;
 }
-.app-sbm-top-1, .app-sbm-bottom-1 {
+.app-sbm-top-0, .app-sbm-bottom-1 {
 	height: 47px;
+	padding: 10px;
 }
-.app-sbm-top-2, .app-sbm-bottom-2 {
+.app-sbm-top-1, .app-sbm-bottom-2 {
 	height: 76px;
 }
-.app-sbm-top-3, .app-sbm-bottom-3 {
+.app-sbm-top-2, .app-sbm-bottom-3 {
 	height: 200px;
+}
+/* Временно */
+.col-md-3, .col-md-12 {
+	padding: 10px;
 }

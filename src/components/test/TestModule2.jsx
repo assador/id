@@ -29,7 +29,6 @@ class TestModule2 extends React.Component {
 				<DevProps data={this.state.TestModule2Store._root.entries} store />
 				<h3>TestModule2[{this.props.num}].props:</h3>
 				<DevProps data={this.props} />
-				<hr />
 			</div>
 		);
 	}

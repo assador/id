@@ -31,7 +31,7 @@ class LoginForm extends React.Component {
 				<div className="row">
 					<div className="col-lg-6 col-lg-offset-3">
 						<h1>Вход</h1>
-						<form className="form-horizontal">
+						<form className="form-horizontal fieldswidth_100">
 							<div className="form-group">
 								<input
 									type="email"

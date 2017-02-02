@@ -50,7 +50,6 @@ class TestModule1 extends React.Component {
 				{typeof im !== "undefined" &&
 					<DevProps data={im.entries} store hide="states" />
 				}
-				<hr />
 			</div>
 		);
 	}

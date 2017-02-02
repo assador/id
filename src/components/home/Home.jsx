@@ -34,7 +34,7 @@ class Home extends React.Component {
 			default :
 				modulesAvailable =
 					Object.keys(this.state.homeStore.get("modulesAvailableList")).map(key =>
-						<span key={key}><button
+						<span key={key} className="col-md-12"><button
 							onClick={evt => HomeActions.addHomeModule(
 								this.state.homeStore.get("modulesAvailableList")[key], evt
 							)}
@@ -49,25 +49,55 @@ class Home extends React.Component {
 		return (
 <div className="app-table">
 	<div className="app-row" id="top">
-		<div className="app-cell" id="top-left">
+		<div id="top-left" className={"app-cell"
+			+ " app-sbm-top-" + this.state.homeStore.get("sidebarMode").top
+			+ " app-sbm-left-" + this.state.homeStore.get("sidebarMode").left
+		}>
 		</div>
-		<div className={"app-cell app-sbm-top-" + this.state.homeStore.get("sidebarMode").top} id="top-basic">
+		<div id="top-basic" className={"app-cell"
+			+ " app-sbm-top-" + this.state.homeStore.get("sidebarMode").top
+		}>
 			<h1>Home залогинившегося</h1>
 		</div>
-		<div className="app-cell" id="top-right">
+		<div id="top-right" className={"app-cell"
+			+ " app-sbm-top-" + this.state.homeStore.get("sidebarMode").top
+			+ " app-sbm-right-" + this.state.homeStore.get("sidebarMode").right
+		}>
 			<button onClick={AppActions.logOut} title="Выйти">×</button>
 		</div>
 	</div>
 	<div className="app-row" id="basic">
-		<div className={"app-cell app-sbm-left-" + this.state.homeStore.get("sidebarMode").left} id="basic-left">
+		<div id="basic-left" className={"app-cell"
+			+ " app-sbm-left-" + this.state.homeStore.get("sidebarMode").left
+		}>
 			<h3>Доступные модули</h3>
 			<p>(клик по кнопке модуля добавляет его экземпляр в Home и переключает на него)</p>
-			<div>{modulesAvailable}</div>
-			<h3>Экземпляры модулей</h3>
+			<div className="row">{modulesAvailable}</div>
+		</div>
+		<div className="app-cell" id="basic-basic">
+			<a href="javascript:void(0);" className="app-sba-up" onClick={() => {
+				HomeActions.changeSidebarMode("top", "smaller");
+				this.forceUpdate();
+			}}></a>
+			<a href="javascript:void(0);" className="app-sba-down" onClick={() => {
+				HomeActions.changeSidebarMode("top", "bigger");
+				this.forceUpdate();
+			}}></a>
+			<a href="javascript:void(0);" className="app-sba-left" onClick={() => {
+				HomeActions.changeSidebarMode("left", "smaller");
+				this.forceUpdate();
+			}}></a>
+			<a href="javascript:void(0);" className="app-sba-right" onClick={() => {
+				HomeActions.changeSidebarMode("left", "bigger", 1);
+				this.forceUpdate();
+			}}></a>
+			<h2>Home.props (отладка)</h2>
+			<DevProps data={this.props} />
+			<h2>Экземпляры модулей</h2>
 			<p>(клик по кнопке экземпляра модуля переключает на него)</p>
-			<div>
+			<div className="row">
 				{Object.keys(this.state.homeStore.get("modulesInstances")).map(key =>
-					<span key={key}><button
+					<span key={key} className="col-md-3"><button
 						onClick={evt => HomeActions.setHomeModule(key, evt)}
 						disabled={key === String(this.state.homeStore.get("modulesInstancesNum")) ? true : false}
 					>
@@ -80,31 +110,29 @@ class Home extends React.Component {
 					</button> </span>
 				)}
 			</div>
-		</div>
-		<div className="app-cell" id="basic-basic">
-			<a href="javascript:void(0);" className="app-sba-up"
-				onClick={() => HomeActions.changeSidebarMode("top", "smaller")}></a>
-			<a href="javascript:void(0);" className="app-sba-down"
-				onClick={() => HomeActions.changeSidebarMode("top", "bigger", 3)}></a>
-			<a href="javascript:void(0);" className="app-sba-left"
-				onClick={() => HomeActions.changeSidebarMode("left", "smaller")}></a>
-			<a href="javascript:void(0);" className="app-sba-right"
-				onClick={() => HomeActions.changeSidebarMode("left", "bigger")}></a>
-			<h2>Home.props (отладка)</h2>
-			<DevProps data={this.props} />
 			<hr />
 			<h2>Экземпляр модуля</h2>
 			{modulesActiveInstance}
 		</div>
-		<div className={"app-cell app-sbm-right-" + this.state.homeStore.get("sidebarMode").right} id="basic-right">
+		<div id="basic-right" className={"app-cell"
+			+ " app-sbm-right-" + this.state.homeStore.get("sidebarMode").right
+		}>
 		</div>
 	</div>
 	<div className="app-row" id="bottom">
-		<div className="app-cell" id="bottom-left">
+		<div id="bottom-left" className={"app-cell"
+			+ " app-sbm-bottom-" + this.state.homeStore.get("sidebarMode").bottom
+			+ " app-sbm-left-" + this.state.homeStore.get("sidebarMode").left
+		}>
 		</div>
-		<div className={"app-cell app-sbm-bottom-" + this.state.homeStore.get("sidebarMode").bottom} id="bottom-basic">
+		<div id="bottom-basic" className={"app-cell"
+			+ " app-sbm-bottom-" + this.state.homeStore.get("sidebarMode").bottom
+		}>
 		</div>
-		<div className="app-cell" id="bottom-right">
+		<div id="bottom-right" className={"app-cell"
+			+ " app-sbm-bottom-" + this.state.homeStore.get("sidebarMode").bottom
+			+ " app-sbm-right-" + this.state.homeStore.get("sidebarMode").right
+		}>
 		</div>
 	</div>
 </div>

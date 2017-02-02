@@ -147,13 +147,12 @@ button, input, select, textarea {
 	box-sizing: border-box;
 	height: 22px;
 	padding: 1px 7px 4px 7px;
+	border-width: 1px;
+	border-style: solid;
 	border-radius: 3px;
 	vertical-align: middle;
 	font-family: "PT Sans", Tahoma, Arial, sans-serif; font-size: 100%; line-height: 1.286;
 	transition: all 0.3s;
-}
-button:hover, input:hover, select:hover, textarea:hover {
-	box-shadow: 0 0 8px rgba(255, 243, 201, 0.5);
 }
 input[type="checkbox"], input[type="color"], input[type="file"], input[type="image"], input[type="radio"], input[type="range"] {
 	height: auto;
@@ -179,25 +178,28 @@ select[multiple], textarea {
 	padding: 0 7px 4px 7px;
 	vertical-align: top;
 }
+input:hover, select:hover, textarea:hover, input:focus, select:focus, textarea:focus {
+	box-shadow: 0 0 8px rgba(255, 243, 201, 0.13);
+}
+input, select, textarea {
+	background-color: rgba(144, 98, 62, 0.1);
+	border-color: rgba(200, 177, 160, 0.05) rgba(200, 177, 160, 0.1) rgba(200, 177, 160, 0.6) rgba(200, 177, 160, 0.1);
+}
 button, input[type="button"], button[disabled]:hover, input[type="button"][disabled]:hover {
 	background-color: rgb(193, 170, 154);
-	border-width: 1px;
-	border-style: solid;
 	border-color: rgb(152, 131, 115) rgb(207, 184, 167) rgb(221, 198, 181) rgb(166, 144, 128);
 	color: rgb(70, 41, 23);
 }
 input[type="submit"], input[type="reset"], input[type="submit"][disabled]:hover, input[type="reset"][disabled]:hover {
 	background-color: rgb(186, 136, 98);
-	border-width: 1px;
-	border-style: solid;
 	border-color: rgb(144, 98, 62) rgb(200, 149, 110) rgb(214, 162, 123) rgb(158, 110, 74);
 	color: rgb(70, 41, 23);
 }
-button:hover, input[type="button"]:hover, input[type="submit"]:hover, input[type="reset"]:hover {
+button:hover, input[type="button"]:hover, input[type="submit"]:hover, input[type="reset"]:hover,
+button:focus, input[type="button"]:focus, input[type="submit"]:focus, input[type="reset"]:focus {
 	background-color: rgb(218, 166, 126);
-	border-width: 1px;
-	border-style: solid;
 	border-color: rgb(175, 126, 89) rgb(232, 179, 139) rgb(247, 193, 152) rgb(189, 139, 101);
+	box-shadow: 0 0 8px rgba(255, 243, 201, 0.5);
 	color: rgb(70, 41, 23);
 }
 input[type="hidden"] {
@@ -211,6 +213,13 @@ input[type="hidden"] {
 
 /* Разные стили */
 
+.fieldswidth_100 .field_parent {
+	position: relative;
+	white-space: nowrap;
+}
+.fieldwidth_100, .fieldswidth_100 input[type="email"]:first-child:last-child, .fieldswidth_100 input[type="file"]:first-child:last-child, .fieldswidth_100 input[type="password"]:first-child:last-child, .fieldswidth_100 input[type="search"]:first-child:last-child, .fieldswidth_100 input[type="tel"]:first-child:last-child, .fieldswidth_100 input[type="text"]:first-child:last-child, .fieldswidth_100 input[type="url"]:first-child:last-child, .fieldswidth_100 select:first-child:last-child, .fieldswidth_100 textarea:first-child:last-child {
+	width: 100%;
+}
 *[class*="app-sba-"] {
 	position: absolute;
 	line-height: 0;
