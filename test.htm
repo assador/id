@@ -9,31 +9,30 @@
 	<link rel="stylesheet" href="/css/grid.css" />
 	<link rel="stylesheet" href="/css/style.css" />
 	<link rel="stylesheet" href="/css/layout.css" />
-	<script src="/scripts/decor.js" type="text/javascript"></script>
 	<script src="/vendor/jquery/3.1.1/jquery.min.js"></script>
 	<script src="/vendor/jquery-ui/1.12.1/jquery-ui.min.js"></script>
+<!--
 	<script src="/node_modules/react/dist/react.js"></script>
 	<script src="/node_modules/react-dom/dist/react-dom.js"></script>
-<!--
+-->
 	<script src="https://unpkg.com/react@15/dist/react.min.js"></script>
 	<script src="https://unpkg.com/react-dom@15/dist/react-dom.min.js"></script>
--->
 </head>
 <body>
 	<div class="table" id="ewaiter-app">
-		<div class="row" id="top">
-			<div class="cell" id="top-left">
+		<div class="app-row" id="top">
+			<div class="app-cell" id="top-left">
 			</div>
-			<div class="cell sbm-top-1" id="top-basic">
+			<div class="app-cell sbm-top-1" id="top-basic">
 				<h1>eWaiter</h1>
 			</div>
-			<div class="cell" id="top-right">
+			<div class="app-cell" id="top-right">
 			</div>
 		</div>
-		<div class="row" id="basic">
-			<div class="cell sbm-left-1" id="basic-left">
+		<div class="app-row" id="basic">
+			<div class="app-cell sbm-left-1" id="basic-left">
 			</div>
-			<div class="cell" id="basic-basic">
+			<div class="app-cell" id="basic-basic">
 				<a href="javascript:void(0);" onclick="changeSidebarModeDecoration('top', 'smaller');" class="sba-up"></a>
 				<a href="javascript:void(0);" onclick="changeSidebarModeDecoration('top', 'bigger');" class="sba-down"></a>
 				<a href="javascript:void(0);" onclick="changeSidebarModeDecoration('left', 'smaller');" class="sba-left"></a>
@@ -186,15 +185,15 @@
 					</div>
 				</div>
 			</div>
-			<div class="cell sbm-right-1" id="basic-right">
+			<div class="app-cell sbm-right-1" id="basic-right">
 			</div>
 		</div>
-		<div class="row" id="bottom">
-			<div class="cell" id="bottom-left">
+		<div class="app-row" id="bottom">
+			<div class="app-cell" id="bottom-left">
 			</div>
-			<div class="cell sbm-bottom-1" id="bottom-basic">
+			<div class="app-cell sbm-bottom-1" id="bottom-basic">
 			</div>
-			<div class="cell" id="bottom-right">
+			<div class="app-cell" id="bottom-right">
 			</div>
 		</div>
 	</div>
