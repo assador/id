@@ -22,9 +22,9 @@ class TestModule2 extends React.Component {
 		const n = "state1", v = 2;
 		return (
 			<div>
-				<button
+				<div className="margin_bottom"><button
 					onClick={evt => TestModule2Actions.setTestState(this.props.num, n, v, evt)}
-				>Увеличить тестовое состояние “{n}” на {v}</button>
+				>Увеличить тестовое состояние “{n}” на {v}</button></div>
 				<h3>TestModule2[{this.props.num}].state:</h3>
 				<DevProps data={this.state.TestModule2Store._root.entries} store />
 				<h3>TestModule2[{this.props.num}].props:</h3>

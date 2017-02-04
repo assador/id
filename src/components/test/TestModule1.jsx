@@ -34,18 +34,22 @@ class TestModule1 extends React.Component {
 				<h3>TestModule1[{this.props.num}].props:</h3>
 				<DevProps data={this.props} />
 				<h3>Редактирование TestModule1[{this.props.num}].state:</h3>
-				{Object.keys(states).map(key => {
-					keyIdx++;
-					return <State
-						key={keyIdx}
-						k={key}
-						v={states[key]}
-						parentModuleNum={this.props.num}
-						setModuleState={TestModule1Actions.setModuleState}
-					/>
-				})}
-				<input type="button" value="Добавить ещё"
-					onClick={evt => TestModule1Actions.addModuleState(this.props.num)} />
+				<div className="row offset_1 margin_bottom">
+					{Object.keys(states).map(key => {
+						keyIdx++;
+						return <State
+							key={keyIdx}
+							k={key}
+							v={states[key]}
+							parentModuleNum={this.props.num}
+							setModuleState={TestModule1Actions.setModuleState}
+						/>
+					})}
+				</div>
+				<div className="margin_bottom">
+					<input type="button" value="Добавить ещё"
+						onClick={evt => TestModule1Actions.addModuleState(this.props.num)} />
+				</div>
 				<h3>TestModule1[{this.props.num}].state:</h3>
 				{typeof im !== "undefined" &&
 					<DevProps data={im.entries} store hide="states" />

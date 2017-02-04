@@ -27,38 +27,34 @@ class LoginForm extends React.Component {
 	}
 	render() {
 		return (
-			<div className="container-fluid">
-				<div className="row">
-					<div className="col-lg-6 col-lg-offset-3">
-						<h1>Вход</h1>
-						<form className="form-horizontal fieldswidth_100">
-							<div className="form-group">
-								<input
-									type="email"
-									onChange={this.handleChange}
-									ref={(input) => this.emailObj = input}
-									placeholder="E-mail"
-									value={this.state.email}
-								/>
-							</div>
-							<div className="form-group">
-								<input
-									type="password"
-									onChange={this.handleChange}
-									ref={(input) => this.pasObj = input}
-									placeholder="Пароль"
-								/>
-							</div>
-							<LoginMessage message={this.state.message} />
-							<div className="form-group">
-								<button
-									type="submit"
-									onClick={this.handleSubmit}
-								>Войти</button>
-							</div>
-						</form>
+			<div className="center cw_g2">
+				<h1>Вход</h1>
+				<form className="fieldswidth_100">
+					<div className="margin_bottom">
+						<input
+							type="email"
+							onChange={this.handleChange}
+							ref={(input) => this.emailObj = input}
+							placeholder="E-mail"
+							value={this.state.email}
+						/>
 					</div>
-				</div>
+					<div className="margin_bottom">
+						<input
+							type="password"
+							onChange={this.handleChange}
+							ref={(input) => this.pasObj = input}
+							placeholder="Пароль"
+						/>
+					</div>
+					<LoginMessage message={this.state.message} />
+					<div className="margin_bottom">
+						<button
+							type="submit"
+							onClick={this.handleSubmit}
+						>Войти</button>
+					</div>
+				</form>
 			</div>
 		);
 	}

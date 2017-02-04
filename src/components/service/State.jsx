@@ -26,13 +26,25 @@ export default class State extends React.Component {
 	}
 	render() {
 		return (
-			<div className="form-group">
-				<input type="text" value={this.props.k} placeholder="Имя состояния"
-					onChange={this.changeKey.bind(this)} />&#160;:&#160;&#160;
-				<input type="text" value={this.props.v} placeholder="Значение состояния"
-					onChange={this.changeValue.bind(this)} />&#160;&#160;&#160;
-				<input type="button" value="Удалить состояние"
-					onClick={this.deleteState.bind(this)} />
+			<div>
+				<div className="col-5">
+					<input type="text" value={this.props.k} placeholder="Имя состояния"
+						onChange={this.changeKey.bind(this)}
+						className="fieldwidth_100"
+					/>
+				</div>
+				<div className="col-5">
+					<input type="text" value={this.props.v} placeholder="Значение состояния"
+						onChange={this.changeValue.bind(this)}
+						className="fieldwidth_100"
+					/>
+				</div>
+				<div className="col-2">
+					<input type="button" value="Удалить"
+						onClick={this.deleteState.bind(this)}
+						className="fieldwidth_100"
+					/>
+				</div>
 			</div>
 		);
 	}

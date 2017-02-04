@@ -14,17 +14,17 @@ body {
 .app-row, .app-cell {
 	position: relative;
 }
-.app-table {
+.table {
 	display: table;
 	position: relative;
 	width: 100%; height: 100%;
-	min-width: 994px;
 }
 .app-row {
 	display: table-row;
 }
 .app-cell {
 	display: table-cell;
+	box-sizing: border-box;
 	padding: 24px;
 	vertical-align: baseline;
 	text-align: left;
@@ -45,40 +45,47 @@ body {
 #basic, #basic-basic {
 	z-index: 30;
 }
-#top-basic.app-sbm-top-1 {
+#top-basic.sbm-top-1 {
 	padding-left: 38px;
 }
-*[class*="app-sbm-"] {
+*[class*="sbm-"] {
 	transition: all 0.7s;
 }
-.app-sbm-top-0, .app-sbm-right-0, .app-sbm-bottom-0, .app-sbm-left-0 {
+.sbm-top-0, .sbm-right-0, .sbm-bottom-0, .sbm-left-0 {
 	display: none;
 }
-.app-sbm-left-1, .app-sbm-right-1 {
+.sbm-left-1, .sbm-right-1 {
 	width: 76px;
-	padding: 10px;
+	padding: 12px;
 }
-.app-sbm-left-2, .app-sbm-right-2 {
+.sbm-left-2, .sbm-right-2 {
 	width: 200px;
 }
-.app-sbm-left-3, .app-sbm-right-3 {
+.sbm-left-3, .sbm-right-3 {
 	width: 250px;
 }
-.app-sbm-top-1, .app-sbm-bottom-1 {
+.sbm-top-1, .sbm-bottom-1 {
 	height: 47px;
-	padding: 10px;
+	padding: 12px;
 }
-.app-sbm-top-2, .app-sbm-bottom-2 {
+.sbm-top-2, .sbm-bottom-2 {
 	height: 76px;
 }
-.app-sbm-top-3, .app-sbm-bottom-3 {
+.sbm-top-3, .sbm-bottom-3 {
 	height: 200px;
 }
-/* Временно */
-.app-sbm-left-0 .col-md-12, .app-sbm-right-1 .col-md-12 {
-	padding: 5px;
+.sbm-left-1 .row, .sbm-right-1 .row {
+	margin: -6px;
 }
-/* Временно */
-.col-md-3, .col-md-12 {
-	padding: 10px;
+.sbm-left-1 *[class*="col-"], .sbm-right-1 *[class*="col-"] {
+	padding: 6px;
+}
+
+/* Разные стили */
+
+.block_01, .block_02, .block_03, .block_04, .block_05, .block_11, pre, .pre {
+	position: relative;
+	margin-bottom: 18px;
+	padding: 11px 16px;
+	z-index: 0;
 }
