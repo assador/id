@@ -42,6 +42,9 @@ pre, .pre,
 tr:hover, tr:focus {
 	background-color: rgba(144, 98, 62, 0.2);
 }
+*[class*="app-sba-"]:hover {
+	background-color: rgba(144, 98, 62, 0.1);
+}
 body, body.smIframe {
 	background-color: rgb(70, 41, 23);
 }
@@ -220,47 +223,36 @@ input[type="hidden"] {
 .fieldwidth_100, .fieldswidth_100 input[type="email"]:first-child:last-child, .fieldswidth_100 input[type="file"]:first-child:last-child, .fieldswidth_100 input[type="password"]:first-child:last-child, .fieldswidth_100 input[type="search"]:first-child:last-child, .fieldswidth_100 input[type="tel"]:first-child:last-child, .fieldswidth_100 input[type="text"]:first-child:last-child, .fieldswidth_100 input[type="url"]:first-child:last-child, .fieldswidth_100 select:first-child:last-child, .fieldswidth_100 textarea:first-child:last-child {
 	width: 100%;
 }
-*[class*="app-sba-"] {
+*[class*="app-sbas-"], *[class*="app-sba-"] {
 	position: absolute;
 	line-height: 0;
+	vertical-align: top;
 	font-size: 11px;
 	outline: none;
 }
-*[class*="app-sba-"]:hover {
-	background-color: rgba(144, 98, 62, 0.1);
-}
-.app-sba-up, .app-sba-down {
-	right: -1px; left: 0;
-	padding: 8px 24px 12px 24px;
-}
-.app-sba-up {
-	bottom: 100%;
-}
-.app-sba-down {
-	top: 0;
-}
-.app-sba-left, .app-sba-right {
-	top: 0; bottom: 0;
-	padding: 8px 4px 8px 6px;
-}
-.app-sba-left {
-	right: 100%;
-}
-.app-sba-right {
-	left: 0;
-}
-.app-sba-up::before {
-	content: "\25b2";
-}
-.app-sba-down::before {
-	content: "\25bc";
-}
-.app-sba-left::before {
-	content: "\25c4";
-}
-.app-sba-right::before {
-	content: "\25ba";
-}
+.app-sbas-top {top: -20px; right: -1px; left: 0; height: 40px;}
+.app-sbas-right {top: 0; right: -21px; bottom: 0; width: 40px;}
+.app-sbas-bottom {right: -1px; bottom: -20px; left: 0; height: 40px;}
+.app-sbas-left {top: 0; bottom: 0; left: -20px; width: 40px;}
+.app-sba-u {top: 0; right: 0; bottom: 50%; left: 0; padding-top: 8px;}
+.app-sba-r {top: 0; right: 0; bottom: 0; left: 50%; padding-left: 6px;}
+.app-sba-d {top: 50%; right: 0; bottom: 0; left: 0; padding-top: 8px;}
+.app-sba-l {top: 0; right: 50%; bottom: 0; left: 0; padding-left: 5px;}
+.app-sba-u, .app-sba-d {padding-right: 24px; padding-left: 24px;}
+.app-sba-l, .app-sba-r {padding-top: 8px; padding-bottom: 9px;}
+.app-sba-u::before {content: "\25b2";}
+.app-sba-d::before {content: "\25bc";}
+.app-sba-l::before {content: "\25c4";}
+.app-sba-r::before {content: "\25ba";}
+.app-sbas-right .app-sba-l {padding-left: 4px;}
+.app-sbas-right .app-sba-r {padding-left: 5px;}
+.app-sbas-bottom .app-sba-u, .app-sbas-bottom .app-sba-d {padding-top: 9px;}
+.app-sbas-right.app-sbas-0 {right: 0; width: 20px;}
+.app-sbas-right.app-sbas-0 .app-sba-r {display: none;}
+.app-sbas-right.app-sbas-0 .app-sba-l {right: 0;}
+.app-sbas-bottom.app-sbas-0 {bottom: 0; height: 20px;}
+.app-sbas-bottom.app-sbas-0 .app-sba-d {display: none;}
+.app-sbas-bottom.app-sbas-0 .app-sba-u {bottom: 0;}
 
 /* Оформление декорирования */
 

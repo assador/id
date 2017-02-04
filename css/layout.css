@@ -32,9 +32,7 @@ body {
 #top-left, #top-right, #bottom-right, #bottom-left {
 	vertical-align: middle;
 	text-align: center;
-}
 /* Временно */
-#top-left, #top-right, #bottom-right, #bottom-left {
 	line-height: 0;
 	font-size: 18px;
 }
@@ -47,40 +45,38 @@ body {
 #basic, #basic-basic {
 	z-index: 30;
 }
+#top-basic.app-sbm-top-1 {
+	padding-left: 38px;
+}
 *[class*="app-sbm-"] {
-	opacity: 1;
 	transition: all 0.7s;
 }
-.app-sbm-right-0 {
-	width: 1px;
-	padding: 0;
-	opacity: 0;
+.app-sbm-top-0, .app-sbm-right-0, .app-sbm-bottom-0, .app-sbm-left-0 {
+	display: none;
 }
-.app-sbm-left-0, .app-sbm-right-1 {
+.app-sbm-left-1, .app-sbm-right-1 {
 	width: 76px;
 	padding: 10px;
+}
+.app-sbm-left-2, .app-sbm-right-2 {
+	width: 200px;
+}
+.app-sbm-left-3, .app-sbm-right-3 {
+	width: 250px;
+}
+.app-sbm-top-1, .app-sbm-bottom-1 {
+	height: 47px;
+	padding: 10px;
+}
+.app-sbm-top-2, .app-sbm-bottom-2 {
+	height: 76px;
+}
+.app-sbm-top-3, .app-sbm-bottom-3 {
+	height: 200px;
 }
 /* Временно */
 .app-sbm-left-0 .col-md-12, .app-sbm-right-1 .col-md-12 {
 	padding: 5px;
-}
-.app-sbm-left-1, .app-sbm-right-2 {
-	width: 200px;
-}
-.app-sbm-bottom-0 {
-	height: 1px;
-	padding: 0;
-	opacity: 0;
-}
-.app-sbm-top-0, .app-sbm-bottom-1 {
-	height: 47px;
-	padding: 10px;
-}
-.app-sbm-top-1, .app-sbm-bottom-2 {
-	height: 76px;
-}
-.app-sbm-top-2, .app-sbm-bottom-3 {
-	height: 200px;
 }
 /* Временно */
 .col-md-3, .col-md-12 {

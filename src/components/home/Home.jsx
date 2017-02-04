@@ -48,7 +48,9 @@ class Home extends React.Component {
 				[this.state.homeStore.get("modulesInstancesNum")];
 		return (
 <div className="app-table">
-	<div className="app-row" id="top">
+	<div id="top" className={"app-row"
+			+ " app-sbm-top-" + this.state.homeStore.get("sidebarMode").top
+		}>
 		<div id="top-left" className={"app-cell"
 			+ " app-sbm-top-" + this.state.homeStore.get("sidebarMode").top
 			+ " app-sbm-left-" + this.state.homeStore.get("sidebarMode").left
@@ -75,22 +77,50 @@ class Home extends React.Component {
 			<div className="row">{modulesAvailable}</div>
 		</div>
 		<div className="app-cell" id="basic-basic">
-			<a href="javascript:void(0);" className="app-sba-up" onClick={() => {
-				HomeActions.changeSidebarMode("top", "smaller");
-				this.forceUpdate();
-			}}></a>
-			<a href="javascript:void(0);" className="app-sba-down" onClick={() => {
-				HomeActions.changeSidebarMode("top", "bigger");
-				this.forceUpdate();
-			}}></a>
-			<a href="javascript:void(0);" className="app-sba-left" onClick={() => {
-				HomeActions.changeSidebarMode("left", "smaller");
-				this.forceUpdate();
-			}}></a>
-			<a href="javascript:void(0);" className="app-sba-right" onClick={() => {
-				HomeActions.changeSidebarMode("left", "bigger", 1);
-				this.forceUpdate();
-			}}></a>
+			<div className="app-sbas-top">
+				<a href="javascript:void(0);" className="app-sba-u" onClick={() => {
+					HomeActions.changeSidebarMode("top", "smaller");
+					this.forceUpdate();
+				}}></a>
+				<a href="javascript:void(0);" className="app-sba-d" onClick={() => {
+					HomeActions.changeSidebarMode("top", "bigger");
+					this.forceUpdate();
+				}}></a>
+			</div>
+			<div className={"app-sbas-right"
+					+ (!this.state.homeStore.get("sidebarMode").right ? " app-sbas-0" : "")
+				}>
+				<a href="javascript:void(0);" className="app-sba-l" onClick={() => {
+					HomeActions.changeSidebarMode("right", "bigger");
+					this.forceUpdate();
+				}}></a>
+				<a href="javascript:void(0);" className="app-sba-r" onClick={() => {
+					HomeActions.changeSidebarMode("right", "smaller");
+					this.forceUpdate();
+				}}></a>
+			</div>
+			<div className={"app-sbas-bottom"
+					+ (!this.state.homeStore.get("sidebarMode").bottom ? " app-sbas-0" : "")
+				}>
+				<a href="javascript:void(0);" className="app-sba-u" onClick={() => {
+					HomeActions.changeSidebarMode("bottom", "bigger");
+					this.forceUpdate();
+				}}></a>
+				<a href="javascript:void(0);" className="app-sba-d" onClick={() => {
+					HomeActions.changeSidebarMode("bottom", "smaller");
+					this.forceUpdate();
+				}}></a>
+			</div>
+			<div className="app-sbas-left">
+				<a href="javascript:void(0);" className="app-sba-l" onClick={() => {
+					HomeActions.changeSidebarMode("left", "smaller");
+					this.forceUpdate();
+				}}></a>
+				<a href="javascript:void(0);" className="app-sba-r" onClick={() => {
+					HomeActions.changeSidebarMode("left", "bigger");
+					this.forceUpdate();
+				}}></a>
+			</div>
 			<h2>Home.props (отладка)</h2>
 			<DevProps data={this.props} />
 			<h2>Экземпляры модулей</h2>
@@ -119,7 +149,9 @@ class Home extends React.Component {
 		}>
 		</div>
 	</div>
-	<div className="app-row" id="bottom">
+	<div id="bottom" className={"app-row"
+			+ " app-sbm-bottom-" + this.state.homeStore.get("sidebarMode").bottom
+		}>
 		<div id="bottom-left" className={"app-cell"
 			+ " app-sbm-bottom-" + this.state.homeStore.get("sidebarMode").bottom
 			+ " app-sbm-left-" + this.state.homeStore.get("sidebarMode").left
