@@ -8,12 +8,11 @@ class LoginMessage extends React.Component {
 		}
 	}
 	render() {
-		let message='';
-		if(this.props.message){
-			message=<small>{this.props.message}<br/><br/></small>;
-		}
 		return (
-				<div>{message}</div>
+			(this.props.message
+				? <div className="imp margin_bottom">{this.props.message}</div>
+				: false
+			)
 		);
 	}
 }

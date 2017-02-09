@@ -51,8 +51,7 @@ class ServerApi {
  * И все (все!) зарегистрированные Store их получают. И на нужные — реагируют.
  */
 	onReceiveData(data) {
-		//console.log("DATA RECEIVED!");
-		//console.log(data);
+console.dir(data.session);
 		if(data.session && data.session != this._session) {
 			this._session = data.session;
 			localStorage.setItem("session", this._session);

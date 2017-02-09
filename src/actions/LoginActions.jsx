@@ -11,10 +11,9 @@ const LoginActions = {
 	},
 	sendForm(login, password) {
 		this.setData({
-			mode:'Loading',
-			email:login
-		})
-
+			mode: "Loading",
+			email: login,
+		});
 		ServerApi.ask("login", {
 			"action": "in",
 			"login": login,

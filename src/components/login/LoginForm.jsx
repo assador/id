@@ -14,7 +14,7 @@ class LoginForm extends React.Component {
 	}
 	handleSubmit() {
 		if(!this.emailObj.value || !this.pasObj.value) {
-			this.setState({message: "Обязательно укажите E-mail и Пароль!"});
+			this.setState({message: "Обязательно укажите e-mail и пароль!"});
 		} else {
 			LoginActions.sendForm(this.emailObj.value, this.pasObj.value);
 		}
@@ -50,7 +50,7 @@ class LoginForm extends React.Component {
 					<LoginMessage message={this.state.message} />
 					<div className="margin_bottom">
 						<button
-							type="submit"
+							type="button"
 							onClick={this.handleSubmit}
 						>Войти</button>
 					</div>

@@ -3,8 +3,8 @@ class Login {
     const DEF_ROLES_OUT_ACTION='SET_APP_ROLES';
     private $errors=array(
       'USER_BLOCKED'=>'Пользователь заблокирован',
-      'USER_WRONG'=>'Неправильный E-mail и/или пароль',
-      'SHOULD_BE_LOGGED'=>'Чтобы отлогиниться вы должны быть залогиненным'
+      'USER_WRONG'=>'Неправильные e-mail и/или пароль',
+      'SHOULD_BE_LOGGED'=>'Чтобы выйти, сначала нужно войти'
     );
 
     public function doAction($in){

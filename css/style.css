@@ -258,7 +258,7 @@ select[multiple], textarea {
 	vertical-align: top;
 }
 input:hover, select:hover, .selectspan:hover, textarea:hover, input:focus, select:focus, .selectspan:focus, textarea:focus {
-	box-shadow: 0 0 8px rgba(255, 243, 201, 0.13);
+	box-shadow: 0 0 8px rgba(255, 243, 201, 0.1);
 }
 input, select, .selectspan, textarea {
 	background-color: rgba(144, 98, 62, 0.1);
@@ -278,7 +278,7 @@ button:hover, input[type="button"]:hover, input[type="submit"]:hover, input[type
 button:focus, input[type="button"]:focus, input[type="submit"]:focus, input[type="reset"]:focus {
 	background-color: rgb(218, 166, 126);
 	border-color: rgb(175, 126, 89) rgb(232, 179, 139) rgb(247, 193, 152) rgb(189, 139, 101);
-	box-shadow: 0 0 8px rgba(255, 243, 201, 0.5);
+	box-shadow: 0 0 8px rgba(255, 243, 201, 0.3);
 	color: rgb(70, 41, 23);
 }
 input[type="hidden"] {
