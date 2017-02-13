@@ -9,6 +9,7 @@ class UserSession {
     $tabUser=dbTableName('user');
     $tabSession=dbTableName('session');
     $sql='SELECT t1.id,t1.email,t1.isblocked,hex(t2.sessionkey) as sessionid FROM '.$tabUser.' as t1, '.$tabSession.' as t2 WHERE t2.sessionkey=unhex("'.$db->escape_string($key).'") and t2.expires>NOW() and t1.id=t2.user_id limit 1';
+
     if($result=$db->query($sql)){
       while($row=$result->fetch_assoc()){
         $this->data['id']=$row['id'];
@@ -30,7 +31,9 @@ class UserSession {
         };
       };
       $result->close();
-    }
+    } else {
+	echo $db->error;
+}
     return $this->data['islogged'];
   }
 
@@ -42,8 +45,13 @@ class UserSession {
     if($result=$db->query($sql)){
       while($row=$result->fetch_assoc()){
         $sessionid=$row['sessionid'];
-        $sql='INSERT INTO '.$tabSession.' (user_id,sessionkey,created,expires,ip) values ('.$userid.',unhex("'.$sessionid.'"),NOW(),NOW() + interval '.SESSION_EXPIRES.',INET6_ATON("'.$db->real_escape_string($_SERVER['REMOTE_ADDR']).'"))';
-        $db->query($sql);
+//        $sql='INSERT INTO '.$tabSession.' (user_id,sessionkey,created,expires,ip) values ('.$userid.',unhex("'.$sessionid.'"),NOW(),NOW() + interval '.SESSION_EXPIRES.',INET6_ATON("'.$db->real_escape_string($_SERVER['REMOTE_ADDR']).'"))';
+        $sql='INSERT INTO '.$tabSession.' (user_id,sessionkey,created,expires) values ('.$userid.',unhex("'.$sessionid.'"),NOW(),NOW() + interval '.SESSION_EXPIRES.')';
+
+        
+	$db->query($sql);
+	echo $db->error;
+
         $sql='DELETE FROM '.$tabSession.' WHERE user_id='.$userid.' AND sessionkey not in (unhex("'.$sessionid.'"))';
         $db->query($sql);
       };
