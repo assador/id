@@ -1,8 +1,4 @@
-node_modules
-.DS_Store
-.babelrc
+*.geany
+*.log
+/node_modules*
 .gitignore
-package.json
-webpack.config.js
-eWaiter.geany
-npm-debug.log
